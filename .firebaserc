@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "simplyprefab-de76e",
+    "staging": "simplyprefab-de76e"
+  },
+  "targets": {
+    "simplyprefab-de76e": {
+      "hosting": {
+        "app": [
+          "simplyprefab-de76e"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

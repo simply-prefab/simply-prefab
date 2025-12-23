@@ -1,0 +1,52 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =======================
+    // CONSULTATION BOOKINGS
+    // =======================
+    // Anyone can read bookings (for frontend slot availability UI)
+    // No one can write except backend/server-side Admin SDK
+    match /bookings/{bookingId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // =======================
+    // ORDERS
+    // =======================
+    // No public access (handled by backend)
+    match /orders/{orderId} {
+      allow read: if false;
+      allow write: if false;
+    }
+
+    // =======================
+    // PAYMENTS (Razorpay)
+    // =======================
+    match /payments/{paymentId} {
+      allow read: if false;
+      allow write: if false;
+    }
+
+    // =======================
+    // PAYMENT/WEBHOOK ERRORS
+    // =======================
+    match /paymentErrors/{errorId} {
+      allow read: if false;
+      allow write: if false;
+    }
+    match /webhookErrors/{errorId} {
+      allow read: if false;
+      allow write: if false;
+    }
+
+    // =======================
+    // DEFAULT CATCHALL DENY
+    // =======================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
