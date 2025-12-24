@@ -8,7 +8,7 @@ import { CONFIG } from '@/utils/config';
 
 const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const whatsappNumber = CONFIG.WHATSAPP.TEAM_NUMBER || "+9676191370";
+  const whatsappNumber = CONFIG.WHATSAPP.TEAM_NUMBER || "+818179601941";
   
   const handleWhatsAppChat = () => {
     const message = "Hello! I'm interested in SimplyPrefab's paid services. Can you help me?";
