@@ -1,45 +1,31 @@
 'use client'
 
-import { collection, doc, limit, onSnapshot, orderBy, query, Timestamp, updateDoc } from 'firebase/firestore';
-import {
-  AlertTriangle,
-  Calendar,
-  CalendarDays,
-  CheckCircle,
-  Clock,
-  Download,
-  Edit2,
-  FileText,
-  Filter,
-  IndianRupee,
-  Loader2,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Phone,
-  RefreshCcw,
-  Save,
-  Search,
-  SortAsc,
-  SortDesc,
-  TrendingUp,
-  Users,
-  X,
-  XCircle
-} from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
 import AdminNavigation from '@/components/AdminNavigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { db } from '@/config/firebase.config';
-import { CONFIG } from '@/utils/config';
 import IntegrationService from '@/utils/integrationService';
+import { collection, limit, onSnapshot, orderBy, query, Timestamp } from 'firebase/firestore';
+import {
+  CalendarDays,
+  CheckCircle,
+  Clock,
+  Edit2,
+  FileText,
+  IndianRupee,
+  Loader2,
+  RefreshCcw,
+  Save,
+  SortAsc,
+  SortDesc,
+  Users,
+  X
+} from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface BookingData {
   id: string;
@@ -87,25 +73,31 @@ export default function AdminDashboard() {
   const integrationService = IntegrationService.getInstance();
 
   useEffect(() => {
-    console.log('📊 Setting up real-time Firestore listener for orders...');
+    console.log('📊 Setting up real-time Firestore listener for bookings...');
 
     try {
-      const ordersQuery = query(
-        collection(db, 'orders'),
+      // ✅ FIXED: Changed from 'orders' to 'bookings'
+      const bookingsQuery = query(
+        collection(db, 'bookings'),
         orderBy('createdAt', 'desc'),
         limit(100)
       );
 
       const unsubscribe = onSnapshot(
-        ordersQuery,
+        bookingsQuery,
         (snapshot) => {
-          console.log(`📦 Received ${snapshot.docs.length} orders from Firestore`);
+          console.log(`📦 Received ${snapshot.docs.length} bookings from Firestore`);
 
-          const ordersData: BookingData[] = snapshot.docs.map(doc => {
+          const bookingsData: BookingData[] = snapshot.docs.map(doc => {
             const data = doc.data();
 
+            // Parse appointmentDate
             let appointmentDate = new Date();
-            if (data.appointmentDate) {
+            if (data.date) {
+              if (typeof data.date === 'string') {
+                appointmentDate = new Date(data.date);
+              }
+            } else if (data.appointmentDate) {
               if (data.appointmentDate instanceof Timestamp) {
                 appointmentDate = data.appointmentDate.toDate();
               } else if (typeof data.appointmentDate === 'string') {
@@ -113,6 +105,7 @@ export default function AdminDashboard() {
               }
             }
 
+            // Parse createdAt
             let createdAt = new Date();
             if (data.createdAt) {
               if (data.createdAt instanceof Timestamp) {
@@ -122,6 +115,7 @@ export default function AdminDashboard() {
               }
             }
 
+            // Parse status
             let status: 'confirmed' | 'pending' | 'completed' | 'cancelled' | 'paid' = 'pending';
             if (data.status) {
               const firestoreStatus = data.status.toLowerCase();
@@ -142,13 +136,13 @@ export default function AdminDashboard() {
               customerEmail: data.customerEmail || '',
               customerPhone: data.customerPhone || '',
               appointmentDate,
-              appointmentTime: data.appointmentTime || '',
+              appointmentTime: data.timeSlot || data.appointmentTime || '',
               amount: data.amount || 0,
               status,
               paymentId: data.paymentId || '',
-              location: data.location,
-              projectType: data.projectType,
-              description: data.description,
+              location: data.location || '',
+              projectType: data.projectType || '',
+              description: data.message || data.description || '',
               communicationStatus: data.communicationStatus || {
                 email: false,
                 whatsapp: false,
@@ -158,9 +152,10 @@ export default function AdminDashboard() {
             };
           });
 
-          setBookings(ordersData);
+          setBookings(bookingsData);
           setIsLoading(false);
           setLastUpdated(new Date());
+          console.log('✅ Bookings loaded:', bookingsData.length);
         },
         (error) => {
           console.error('❌ Firestore listener error:', error);
@@ -233,22 +228,42 @@ export default function AdminDashboard() {
     return sorted;
   }, [bookings, searchTerm, statusFilter, sortBy, sortOrder]);
 
+  // ✅ FIXED: Changed from 'orders' to 'bookings'
+  // Replace the existing updateBookingStatus function with this:
   const updateBookingStatus = async (newStatus: string) => {
     if (!selectedBooking) return;
 
     setIsUpdatingStatus(true);
     try {
-      const bookingRef = doc(db, 'orders', selectedBooking.id);
-      await updateDoc(bookingRef, { status: newStatus });
+      // ✅ Call the API route instead of updating Firestore directly
+      const response = await fetch('/api/admin/update-booking-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          bookingId: selectedBooking.id,
+          status: newStatus
+        })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to update status');
+      }
+
+      const result = await response.json();
+      console.log('✅ Status updated:', result);
+
       setEditedStatus('');
       setIsEditingStatus(false);
     } catch (err) {
-      console.error('Error updating status:', err);
+      console.error('❌ Error updating status:', err);
       setError('Failed to update status');
+      alert('Failed to update status. Please try again.');
     } finally {
       setIsUpdatingStatus(false);
     }
   };
+
 
   const handleRefresh = async () => {
     setIsLoading(true);
@@ -265,7 +280,7 @@ export default function AdminDashboard() {
   return (
     <div style={{ backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
       <AdminNavigation />
-      
+
       <div className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto space-y-6">
           {/* Header */}
@@ -460,213 +475,264 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
 
-          {/* Booking Details Modal */}
+          {/* Booking Details Modal - RESPONSIVE VERSION */}
+          {/* Booking Details Modal - FIXED SCROLLING VERSION */}
           {selectedBooking && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto" style={{ borderColor: '#FFD0A0', border: '2px solid' }}>
-                <CardHeader style={{ backgroundColor: '#FFF5E6', borderBottom: '2px solid #FFD0A0' }}>
-                  <CardTitle style={{ color: '#1a1a1a' }}>
-                    Booking Details - {selectedBooking.customerName}
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent className="pt-6 space-y-4">
-                  {/* Customer Info */}
-                  <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Users className="h-4 w-4" style={{ color: '#FB921D' }} />
-                      <h3 className="font-bold text-sm" style={{ color: '#1a1a1a' }}>
-                        Customer Information
-                      </h3>
+            <div className="fixed inset-0 bg-black/50 flex items-start sm:items-center justify-center z-50 overflow-y-auto">
+              <div className="min-h-screen sm:min-h-0 w-full flex items-start sm:items-center justify-center p-2 sm:p-4">
+                <Card
+                  className="w-full max-w-2xl my-4 sm:my-8 relative"
+                  style={{ borderColor: '#FFD0A0', border: '2px solid', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}
+                >
+                  {/* Header - Sticky */}
+                  <CardHeader
+                    className="sticky top-0 z-10 flex-shrink-0"
+                    style={{ backgroundColor: '#FFF5E6', borderBottom: '2px solid #FFD0A0' }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-base sm:text-lg" style={{ color: '#1a1a1a' }}>
+                        Booking Details
+                      </CardTitle>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        onClick={() => {
+                          setSelectedBooking(null);
+                          setIsEditingStatus(false);
+                        }}
+                        className="h-8 w-8"
+                        style={{ color: '#FB921D' }}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
                     </div>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
-                      <div>
-                        <p style={{ color: '#666', fontSize: '12px' }}>Name</p>
-                        <p style={{ color: '#1a1a1a', fontWeight: 'bold' }}>
-                          {selectedBooking.customerName}
-                        </p>
-                      </div>
-                      <div>
-                        <p style={{ color: '#666', fontSize: '12px' }}>Phone</p>
-                        <p style={{ color: '#1a1a1a', fontWeight: 'bold' }}>
-                          {selectedBooking.customerPhone}
-                        </p>
-                      </div>
-                      <div className="col-span-2">
-                        <p style={{ color: '#666', fontSize: '12px' }}>Email</p>
-                        <p style={{ color: '#1a1a1a', fontWeight: 'bold' }}>
-                          {selectedBooking.customerEmail}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  </CardHeader>
 
-                  {/* Appointment Card */}
-                  <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
-                    <div className="flex items-center gap-2 mb-2">
-                      <CalendarDays className="h-4 w-4" style={{ color: '#FB921D' }} />
-                      <h3 className="font-bold text-sm" style={{ color: '#1a1a1a' }}>
-                        Appointment
-                      </h3>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
-                          Date
-                        </p>
-                        <p className="text-sm font-bold" style={{ color: '#1a1a1a' }}>
-                          {selectedBooking.appointmentDate.toLocaleDateString('en-IN', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric'
-                          })}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
-                          Time
-                        </p>
-                        <p className="text-sm font-bold" style={{ color: '#1a1a1a' }}>
-                          {selectedBooking.appointmentTime}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Type */}
-                  <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
-                    <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
-                      Project Type
-                    </p>
-                    <p className="text-sm font-bold" style={{ color: '#1a1a1a' }}>
-                      {selectedBooking.projectType}
-                    </p>
-                  </div>
-
-                  {/* Amount Paid */}
-                  <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
-                    <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
-                      Amount Paid
-                    </p>
-                    <p className="text-xl font-bold" style={{ color: '#FB921D' }}>
-                      ₹{selectedBooking.amount.toLocaleString()}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  {selectedBooking.description && (
+                  {/* Scrollable Content */}
+                  <CardContent className="pt-4 pb-4 space-y-3 overflow-y-auto flex-1" style={{ maxHeight: 'calc(90vh - 140px)' }}>
+                    {/* Customer Info */}
                     <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
-                      <div className="flex items-center gap-2 mb-1">
-                        <FileText className="h-4 w-4" style={{ color: '#FB921D' }} />
-                        <p className="text-xs font-semibold" style={{ color: '#C55A00' }}>
-                          Description
-                        </p>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Users className="h-4 w-4 flex-shrink-0" style={{ color: '#FB921D' }} />
+                        <h3 className="font-bold text-sm" style={{ color: '#1a1a1a' }}>
+                          Customer Information
+                        </h3>
                       </div>
-                      <p className="text-sm whitespace-pre-wrap" style={{ color: '#1a1a1a' }}>
-                        {selectedBooking.description}
-                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div>
+                          <p style={{ color: '#666', fontSize: '12px' }}>Name</p>
+                          <p style={{ color: '#1a1a1a', fontWeight: 'bold' }} className="break-words">
+                            {selectedBooking.customerName}
+                          </p>
+                        </div>
+                        <div>
+                          <p style={{ color: '#666', fontSize: '12px' }}>Phone</p>
+                          <p style={{ color: '#1a1a1a', fontWeight: 'bold' }} className="break-all">
+                            {selectedBooking.customerPhone}
+                          </p>
+                        </div>
+                        <div className="sm:col-span-2">
+                          <p style={{ color: '#666', fontSize: '12px' }}>Email</p>
+                          <p style={{ color: '#1a1a1a', fontWeight: 'bold' }} className="break-all text-xs sm:text-sm">
+                            {selectedBooking.customerEmail}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  )}
 
-                  {/* Status Update */}
-                  <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
-                    <p className="text-xs font-semibold mb-2" style={{ color: '#C55A00' }}>
-                      Order Status
-                    </p>
-                    {isEditingStatus ? (
-                      <div className="flex gap-2">
-                        <Select value={editedStatus} onValueChange={setEditedStatus}>
-                          <SelectTrigger style={{ borderColor: '#FFD0A0' }}>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="pending">Pending</SelectItem>
-                            <SelectItem value="paid">Paid</SelectItem>
-                            <SelectItem value="confirmed">Confirmed</SelectItem>
-                            <SelectItem value="completed">Completed</SelectItem>
-                            <SelectItem value="cancelled">Cancelled</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <Button
-                          size="sm"
-                          onClick={() => updateBookingStatus(editedStatus)}
-                          disabled={isUpdatingStatus}
-                          style={{ backgroundColor: '#FB921D', color: 'white', border: 'none' }}
-                        >
-                          <Save className="h-4 w-4" />
-                        </Button>
+                    {/* Appointment Card */}
+                    <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <CalendarDays className="h-4 w-4 flex-shrink-0" style={{ color: '#FB921D' }} />
+                        <h3 className="font-bold text-sm" style={{ color: '#1a1a1a' }}>
+                          Appointment
+                        </h3>
                       </div>
-                    ) : (
-                      <div className="flex items-center justify-between">
-                        <Badge
-                          style={{
-                            backgroundColor: getStatusColor(selectedBooking.status).bg,
-                            color: getStatusColor(selectedBooking.status).color,
-                            border: `1px solid ${getStatusColor(selectedBooking.status).border}`
-                          }}
-                        >
-                          {selectedBooking.status.charAt(0).toUpperCase() + selectedBooking.status.slice(1)}
-                        </Badge>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setIsEditingStatus(true)}
-                          style={{ borderColor: '#FFD0A0', color: '#FB921D' }}
-                        >
-                          <Edit2 className="h-4 w-4 mr-1" />
-                          Edit
-                        </Button>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
+                            Date
+                          </p>
+                          <p className="text-sm font-bold" style={{ color: '#1a1a1a' }}>
+                            {selectedBooking.appointmentDate.toLocaleDateString('en-IN', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
+                            Time
+                          </p>
+                          <p className="text-sm font-bold" style={{ color: '#1a1a1a' }}>
+                            {selectedBooking.appointmentTime}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Location */}
+                    {selectedBooking.location && (
+                      <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
+                        <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
+                          Location
+                        </p>
+                        <p className="text-sm font-bold break-words" style={{ color: '#1a1a1a' }}>
+                          {selectedBooking.location}
+                        </p>
                       </div>
                     )}
-                  </div>
 
-                  {/* Footer Info */}
-                  <div className="pt-2 space-y-1.5 text-xs" style={{ color: '#C55A00' }}>
-                    <div className="flex justify-between">
-                      <span>Payment ID</span>
-                      <span className="font-mono text-xs" style={{ color: '#1a1a1a' }}>
-                        {selectedBooking.paymentId.length > 15
-                          ? `${selectedBooking.paymentId.slice(0, 15)}...`
-                          : selectedBooking.paymentId}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Order Date</span>
-                      <span style={{ color: '#1a1a1a' }}>
-                        {selectedBooking.createdAt.toLocaleDateString('en-IN', {
-                          day: 'numeric',
-                          month: 'short'
-                        })} -  {selectedBooking.createdAt.toLocaleTimeString('en-IN', {
-                          hour: '2-digit',
-                          minute: '2-digit'
-                        })}
-                      </span>
-                    </div>
-                  </div>
-                </CardContent>
+                    {/* Project Type */}
+                    {selectedBooking.projectType && (
+                      <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
+                        <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
+                          Project Type
+                        </p>
+                        <p className="text-sm font-bold break-words" style={{ color: '#1a1a1a' }}>
+                          {selectedBooking.projectType}
+                        </p>
+                      </div>
+                    )}
 
-                {/* Footer Button */}
-                <div className="p-3 border-t-2" style={{ borderColor: '#FFD0A0', backgroundColor: 'white' }}>
-                  <Button
-                    onClick={() => {
-                      setSelectedBooking(null);
-                      setIsEditingStatus(false);
-                    }}
-                    className="w-full font-semibold text-sm text-white transition-all duration-300"
-                    style={{ backgroundColor: '#FB921D' }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = '#E67E0F';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = '#FB921D';
-                    }}
-                  >
-                    Close
-                  </Button>
-                </div>
-              </Card>
+                    {/* Amount Paid */}
+                    <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
+                      <p className="text-xs font-semibold mb-0.5" style={{ color: '#C55A00' }}>
+                        Amount Paid
+                      </p>
+                      <p className="text-xl font-bold" style={{ color: '#FB921D' }}>
+                        ₹{selectedBooking.amount.toLocaleString()}
+                      </p>
+                    </div>
+
+                    {/* Description */}
+                    {selectedBooking.description && (
+                      <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
+                        <div className="flex items-center gap-2 mb-1">
+                          <FileText className="h-4 w-4 flex-shrink-0" style={{ color: '#FB921D' }} />
+                          <p className="text-xs font-semibold" style={{ color: '#C55A00' }}>
+                            Description
+                          </p>
+                        </div>
+                        <p className="text-sm whitespace-pre-wrap break-words" style={{ color: '#1a1a1a' }}>
+                          {selectedBooking.description}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Status Update */}
+                    <div className="p-3 rounded-lg border-2" style={{ borderColor: '#FFD0A0', backgroundColor: '#FFF5E6' }}>
+                      <p className="text-xs font-semibold mb-2" style={{ color: '#C55A00' }}>
+                        Order Status
+                      </p>
+                      {isEditingStatus ? (
+                        <div className="flex flex-col sm:flex-row gap-2">
+                          <Select value={editedStatus} onValueChange={setEditedStatus}>
+                            <SelectTrigger style={{ borderColor: '#FFD0A0' }} className="flex-1">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="pending">Pending</SelectItem>
+                              <SelectItem value="paid">Paid</SelectItem>
+                              <SelectItem value="confirmed">Confirmed</SelectItem>
+                              <SelectItem value="completed">Completed</SelectItem>
+                              <SelectItem value="cancelled">Cancelled</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              onClick={() => updateBookingStatus(editedStatus)}
+                              disabled={isUpdatingStatus}
+                              className="flex-1 sm:flex-none"
+                              style={{ backgroundColor: '#FB921D', color: 'white', border: 'none' }}
+                            >
+                              {isUpdatingStatus ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => setIsEditingStatus(false)}
+                              className="flex-1 sm:flex-none"
+                              style={{ borderColor: '#FFD0A0', color: '#666' }}
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between flex-wrap gap-2">
+                          <Badge
+                            style={{
+                              backgroundColor: getStatusColor(selectedBooking.status).bg,
+                              color: getStatusColor(selectedBooking.status).color,
+                              border: `1px solid ${getStatusColor(selectedBooking.status).border}`
+                            }}
+                          >
+                            {selectedBooking.status.charAt(0).toUpperCase() + selectedBooking.status.slice(1)}
+                          </Badge>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setIsEditingStatus(true)}
+                            style={{ borderColor: '#FFD0A0', color: '#FB921D' }}
+                          >
+                            <Edit2 className="h-4 w-4 mr-1" />
+                            Edit
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Footer Info */}
+                    <div className="pt-2 space-y-1.5 text-xs" style={{ color: '#C55A00' }}>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <span className="font-semibold">Payment ID</span>
+                        <span className="font-mono text-xs break-all" style={{ color: '#1a1a1a' }}>
+                          {selectedBooking.paymentId}
+                        </span>
+                      </div>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <span className="font-semibold">Order Date</span>
+                        <span style={{ color: '#1a1a1a' }}>
+                          {selectedBooking.createdAt.toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'short'
+                          })} - {selectedBooking.createdAt.toLocaleTimeString('en-IN', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+
+                  {/* Footer Button - Sticky */}
+                  <div className="p-3 border-t-2 sticky bottom-0 bg-white flex-shrink-0" style={{ borderColor: '#FFD0A0' }}>
+                    <Button
+                      onClick={() => {
+                        setSelectedBooking(null);
+                        setIsEditingStatus(false);
+                      }}
+                      className="w-full font-semibold text-sm text-white transition-all duration-300"
+                      style={{ backgroundColor: '#FB921D' }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.backgroundColor = '#E67E0F';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.backgroundColor = '#FB921D';
+                      }}
+                    >
+                      Close
+                    </Button>
+                  </div>
+                </Card>
+              </div>
             </div>
           )}
+
+
         </div>
       </div>
     </div>
