@@ -3,16 +3,15 @@
 import { useExpertConsultation } from '@/contexts/ExpertConsultationContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import EmailService from '@/utils/emailService';
-import { PAYMENT_CONFIG, PaymentGateway, calculateTotalAmount, formatCurrency } from '@/utils/paymentGateway';
-import { ArrowLeft, ArrowRight, CalendarDays, CheckCircle2, Clock, CreditCard, Mail, MapPin, MessageCircle, Phone, Star, X, AlertCircle } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import { PAYMENT_CONFIG, PaymentGateway, formatCurrency } from '@/utils/paymentGateway';
+import { AlertCircle, ArrowLeft, ArrowRight, CalendarDays, CheckCircle2, Clock, CreditCard, Mail, MapPin, MessageCircle, Phone, Star } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Calendar as CalendarComponent } from './ui/calendar';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Progress } from './ui/progress';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Textarea } from './ui/textarea';
 
 const CONSULTATION_SLOTS = [
@@ -73,7 +72,7 @@ const ExpertPopup = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [bookingDetails, setBookingDetails] = useState<any>(null);
   const [bookingError, setBookingError] = useState('');
-  
+
   // 🆕 ADD THIS STATE
   const [policyAccepted, setPolicyAccepted] = useState(false);
 
@@ -218,12 +217,32 @@ const ExpertPopup = () => {
           message: formData.message
         };
 
+        // 🚀 SEND EMAILS WITH DELAYS (600ms between each)
         const emailService = EmailService.getInstance();
-        await Promise.all([
-          emailService.sendCustomerConfirmation(booking),
-          emailService.sendTeamNotification(booking),
-          emailService.sendCalendarInvitation(booking),
-        ]);
+
+        try {
+          // Email 1: Customer confirmation
+          await emailService.sendCustomerConfirmation(booking);
+          console.log('✅ Customer confirmation sent');
+
+          // ⏰ Wait 600ms
+          await new Promise(resolve => setTimeout(resolve, 600));
+
+          // Email 2: Team notification
+          await emailService.sendTeamNotification(booking);
+          console.log('✅ Team notification sent');
+
+          // ⏰ Wait 600ms
+          await new Promise(resolve => setTimeout(resolve, 600));
+
+          // Email 3: Calendar invitation
+          await emailService.sendCalendarInvitation(booking);
+          console.log('✅ Calendar invitation sent');
+
+        } catch (emailError) {
+          console.error('⚠️ Email sending failed:', emailError);
+          // Don't fail the booking if emails fail
+        }
 
         setBookingDetails(booking);
         setCurrentStep('success');
@@ -273,6 +292,7 @@ const ExpertPopup = () => {
       setIsProcessing(false);
     }
   };
+
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -600,7 +620,7 @@ const ExpertPopup = () => {
           >
             {t('expertConsultation.form.maybeLater')}
           </Button>
-          
+
           <Button
             type="submit"
             className="flex-1 h-10 sm:h-12 text-sm sm:text-base font-semibold transition-all duration-200"

@@ -1,15 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../../../config/firebase.config';
+// ❌ DON'T import client SDK
+// import { db } from '../../../../config/firebase.config';
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
+// ✅ DO import Firebase Admin SDK
+import { initializeApp, cert, getApps } from 'firebase-admin/app';
+import { getFirestore, FieldValue } from 'firebase-admin/firestore';
+
+// Initialize Firebase Admin SDK (do this at the top, outside the function)
+if (!getApps().length) {
+  initializeApp({
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    }),
+  });
+}
+
+// Get Firestore instance from Admin SDK
+const adminDb = getFirestore();
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Razorpay
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID!,
+      key_secret: process.env.RAZORPAY_KEY_SECRET!,
+    });
+
     const body = await request.json();
     const { amount, currency, receipt, notes } = body;
 
@@ -23,10 +42,9 @@ export async function POST(request: NextRequest) {
 
     console.log('💳 Creating Razorpay order:', { amount, currency, receipt });
 
-
     // Create Razorpay order
     const order = await razorpay.orders.create({
-      amount: amount, // Amount in paise
+      amount: amount,
       currency: currency,
       receipt: receipt,
       notes: notes || {},
@@ -34,10 +52,10 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Razorpay order created:', order.id);
 
-    // Save order to Firestore
-    await setDoc(doc(db, 'orders', order.id), {
+    // ✅ Save order to Firestore using ADMIN SDK
+    await adminDb.collection('orders').doc(order.id).set({
       orderId: order.id,
-      amount: amount / 100, // Store in rupees
+      amount: amount / 100,
       currency: order.currency,
       status: 'created',
       receipt: order.receipt,
@@ -52,12 +70,11 @@ export async function POST(request: NextRequest) {
       description: notes?.description || '',
       message: notes?.message || '',
       notes: notes || {},
-      createdAt: serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
     });
 
     console.log('✅ Order saved to Firestore');
 
-    // Return order details
     return NextResponse.json({
       id: order.id,
       entity: order.entity,

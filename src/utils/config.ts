@@ -3,17 +3,9 @@
 
 // Environment variable helper that properly reads from Vite env
 const getEnvVar = (key: string, fallback: string = ''): string => {
-  // Vite exposes env variables via import.meta.env
-  if (typeof import.meta !== 'undefined' && import.meta.env) {
-    const viteKey = key.replace('REACT_APP_', 'NEXT_PUBLIC_');
-    return (import.meta.env[viteKey] as string) || fallback;
-  }
-  
-  // Fallback for other environments
   if (typeof process !== 'undefined' && process.env) {
     return process.env[key] || fallback;
   }
-  
   return fallback;
 };
 
@@ -28,10 +20,13 @@ export const CONFIG = {
   },
 
   // Razorpay Payment Gateway Configuration
-  RAZORPAY: {
-    KEY_ID: getEnvVar('REACT_APP_RAZORPAY_KEY_ID', 'rzp_test_RQspYhRIJUVZ3y'),
-    KEY_SECRET: getEnvVar('REACT_APP_RAZORPAY_KEY_SECRET', 'e0JijviRm1UUWzVGJhtN3HkU'),
-    WEBHOOK_SECRET: getEnvVar('REACT_APP_RAZORPAY_WEBHOOK_SECRET', 'YOUR_WEBHOOK_SECRET')
+RAZORPAY: {
+    // Server-side keys (for API routes) - no prefix
+    KEY_ID: getEnvVar('RAZORPAY_KEY_ID', 'rzp_test_RvMhFXre2QEtVG'),
+    KEY_SECRET: getEnvVar('RAZORPAY_KEY_SECRET', 'tzva5IkD6DfVF2EDdlgq5yWm'),
+    
+    // Client-side key (for frontend) - with NEXT_PUBLIC_ prefix
+    // PUBLIC_KEY_ID: getEnvVar('NEXT_PUBLIC_RAZORPAY_KEY_ID', ''),
   },
 
   // Alternative Email Services (in case Resend is not available)

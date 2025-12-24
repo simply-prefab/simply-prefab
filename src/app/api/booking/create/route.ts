@@ -3,10 +3,38 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FieldValue } from 'firebase-admin/firestore';
 
 const CONSULTANT_ID = 'consultant-001';
-const CONSULTATION_SLOTS = ['10:00', '11:00', '12:00', '14:00', '15:00', '16:00'];
+
+// ✅ Accept all 24 hours (00:00 to 23:00)
+const CONSULTATION_SLOTS = [
+  '00:00', // 12:00 AM
+  '01:00', // 1:00 AM
+  '02:00', // 2:00 AM
+  '03:00', // 3:00 AM
+  '04:00', // 4:00 AM
+  '05:00', // 5:00 AM
+  '06:00', // 6:00 AM
+  '07:00', // 7:00 AM
+  '08:00', // 8:00 AM
+  '09:00', // 9:00 AM
+  '10:00', // 10:00 AM
+  '11:00', // 11:00 AM
+  '12:00', // 12:00 PM
+  '13:00', // 1:00 PM
+  '14:00', // 2:00 PM
+  '15:00', // 3:00 PM
+  '16:00', // 4:00 PM
+  '17:00', // 5:00 PM
+  '18:00', // 6:00 PM
+  '19:00', // 7:00 PM
+  '20:00', // 8:00 PM
+  '21:00', // 9:00 PM
+  '22:00', // 10:00 PM
+  '23:00', // 11:00 PM
+];
 
 export async function POST(req: NextRequest) {
   try {
+    const body = await req.json();
     const {
       date,
       timeSlot,
@@ -19,7 +47,9 @@ export async function POST(req: NextRequest) {
       projectType,
       location,
       message
-    } = await req.json();
+    } = body;
+
+    console.log('📥 Received booking request:', { timeSlot, date });
 
     // Validation
     if (!date || !timeSlot || !customerEmail) {
@@ -29,11 +59,19 @@ export async function POST(req: NextRequest) {
     }
 
     if (!CONSULTATION_SLOTS.includes(timeSlot)) {
-      return NextResponse.json({ error: 'Invalid time slot' }, { status: 400 });
+      console.error('❌ Invalid time slot received:', timeSlot);
+      console.error('✅ Allowed slots:', CONSULTATION_SLOTS);
+      return NextResponse.json({ 
+        error: 'Invalid time slot',
+        received: timeSlot,
+        allowed: CONSULTATION_SLOTS
+      }, { status: 400 });
     }
 
     const dateString = new Date(date).toISOString().split('T')[0];
     const bookingId = `BOOK_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+    console.log('✅ Validation passed, creating booking:', bookingId);
 
     // Use Firestore transaction for concurrency control
     try {
@@ -72,7 +110,11 @@ export async function POST(req: NextRequest) {
           updatedAt: FieldValue.serverTimestamp(),
           concurrencyToken: Date.now()
         });
+
+        console.log('✅ Booking created in transaction');
       });
+
+      console.log('✅ Transaction completed successfully');
 
       return NextResponse.json({
         success: true,
@@ -88,6 +130,8 @@ export async function POST(req: NextRequest) {
       }, { status: 201 });
 
     } catch (transactionError) {
+      console.error('❌ Transaction error:', transactionError);
+      
       if (transactionError instanceof Error && transactionError.message === 'SLOT_ALREADY_BOOKED') {
         return NextResponse.json({
           error: 'SLOT_ALREADY_BOOKED',
@@ -98,7 +142,7 @@ export async function POST(req: NextRequest) {
     }
 
   } catch (error) {
-    console.error('Error creating booking:', error);
+    console.error('❌ Error creating booking:', error);
     return NextResponse.json({
       error: 'Failed to create booking',
       details: error instanceof Error ? error.message : 'Unknown error'

@@ -1,7 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { doc, updateDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../../../config/firebase.config';
+
+// ❌ DON'T import client SDK
+// import { doc, updateDoc, serverTimestamp } from 'firebase/firestore';
+// import { db } from '../../../../config/firebase.config';
+
+// ✅ DO import Firebase Admin SDK
+import { initializeApp, cert, getApps } from 'firebase-admin/app';
+import { getFirestore, FieldValue } from 'firebase-admin/firestore';
+
+// Initialize Firebase Admin SDK
+if (!getApps().length) {
+  initializeApp({
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    }),
+  });
+}
+
+const adminDb = getFirestore();
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,14 +47,14 @@ export async function POST(request: NextRequest) {
     if (razorpay_signature === expectedSign) {
       console.log('✅ Payment signature verified');
 
-      // Update order in Firestore
-      await updateDoc(doc(db, 'orders', razorpay_order_id), {
+      // ✅ Update order in Firestore using ADMIN SDK
+      await adminDb.collection('orders').doc(razorpay_order_id).update({
         paymentId: razorpay_payment_id,
         razorpay_payment_id: razorpay_payment_id,
         razorpay_signature: razorpay_signature,
         status: 'paid',
-        paidAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
+        paidAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
       });
 
       console.log('✅ Order updated in Firestore');
