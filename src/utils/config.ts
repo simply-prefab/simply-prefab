@@ -22,8 +22,8 @@ export const CONFIG = {
   // Razorpay Payment Gateway Configuration
 RAZORPAY: {
     // Server-side keys (for API routes) - no prefix
-    KEY_ID: getEnvVar('RAZORPAY_KEY_ID', 'rzp_test_RvMhFXre2QEtVG'),
-    KEY_SECRET: getEnvVar('RAZORPAY_KEY_SECRET', 'tzva5IkD6DfVF2EDdlgq5yWm'),
+    KEY_ID: getEnvVar('RAZORPAY_KEY_ID', 'rzp_live_RzPiBKucHDD7Nx'),
+    KEY_SECRET: getEnvVar('RAZORPAY_KEY_SECRET', 'oZN4d9MfwonOFcdV5rkGsIPs'),
     
     // Client-side key (for frontend) - with NEXT_PUBLIC_ prefix
     // PUBLIC_KEY_ID: getEnvVar('NEXT_PUBLIC_RAZORPAY_KEY_ID', ''),
