@@ -1,0 +1,93 @@
+Deleted:
+TXT	send	0	"v=spf1 include:amazonses.com ~all"	3600	
+MX	send	10	feedback-smtp.ap-northeast-1.amazonses.com	3600	
+Edited:
+TXT	@	0	"v=spf1 include:_spf.google.com include:_spf.mail.hostinger.com ~all"	14400	
+
+
+
+
+-------------------------------------------
+
+
+CNAME	www	0	9850cb3770ecf1b1.vercel-dns-017.com	14400	
+Delete
+Edit
+A	ftp	0	217.21.95.34	1800	
+Delete
+Edit
+CNAME	autoconfig	0	autoconfig.mail.hostinger.com	300	
+Delete
+Edit
+TXT	send	0	"v=spf1 include:amazonses.com ~all"	3600	
+Delete
+Edit
+MX	send	10	feedback-smtp.ap-northeast-1.amazonses.com	3600	
+Delete
+Edit
+TXT	_dmarc	0	"v=DMARC1; p=none;"	14400	
+Delete
+Edit
+CAA	@	0	0 issuewild "pki.goog"	14400	
+Delete
+Edit
+CAA	@	0	0 issuewild "letsencrypt.org"	14400	
+Delete
+Edit
+CAA	@	0	0 issuewild "globalsign.com"	14400	
+Delete
+Edit
+CAA	@	0	0 issuewild "comodoca.com"	14400	
+Delete
+Edit
+CAA	@	0	0 issue "sectigo.com"	14400	
+Delete
+Edit
+CAA	@	0	0 issue "pki.goog"	14400	
+Delete
+Edit
+CAA	@	0	0 issue "letsencrypt.org"	14400	
+Delete
+Edit
+CAA	@	0	0 issue "globalsign.com"	14400	
+Delete
+Edit
+CAA	@	0	0 issue "digicert.com"	14400	
+Delete
+Edit
+CAA	@	0	0 issue "comodoca.com"	14400	
+Delete
+Edit
+CAA	@	0	0 issuewild "digicert.com"	14400	
+Delete
+Edit
+CAA	@	0	0 issuewild "sectigo.com"	14400	
+Delete
+Edit
+TXT	@	0	"zoho-verification=zb03773734.zmverify.zoho.in"	14400	
+Delete
+Edit
+TXT	@	0	"v=spf1 include:_spf.google.com include:_spf.mail.hostinger.com ~all"	14400	
+Delete
+Edit
+TXT	@	0	"google-site-verification=oE2pQ9pPnr09B5UIR1CCj-BAYmYMYJImFavRGvDWcAk"	14400	
+Delete
+Edit
+MX	@	10	ALT4.ASPMX.L.GOOGLE.COM	3600	
+Delete
+Edit
+MX	@	10	ALT3.ASPMX.L.GOOGLE.COM	3600	
+Delete
+Edit
+MX	@	1	ASPMX.L.GOOGLE.COM	3600	
+Delete
+Edit
+MX	@	5	ALT2.ASPMX.L.GOOGLE.COM	3600	
+Delete
+Edit
+MX	@	5	ALT1.ASPMX.L.GOOGLE.COM	3600	
+Delete
+Edit
+A	@	0	216.198.79.1	14400	
+Delete
+Edit

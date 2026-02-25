@@ -1191,7 +1191,7 @@ export const knTranslations = {
     contact: {
       title: "ಸಂಪರ್ಕ ಮಾಹಿತಿ",
       address: "123 ಗ್ರೀನ್ ಸ್ಟ್ರೀಟ್, ಎಕೋ ಸಿಟಿ, ಭಾರತ 500001",
-      email: "enquiry@simplyprefab.com"
+      email: "Projects@simplyprefab.com"
     },
     social: {
       title: "ನಮ್ಮನ್ನು ಅನುಸರಿಸಿ",
@@ -2367,7 +2367,7 @@ export const knTranslations = {
       email: {
         title: "ಇಮೇಲ್ ಬೆಂಬಲ",
         description: "ವಿವರವಾದ ಉತ್ತರಗಳನ್ನು ಪಡೆಯಿರಿ",
-        address: "enquiry@simplyprefab.com"
+        address: "Projects@simplyprefab.com"
       },
       chat: {
         title: "ಲೈವ್ ಚಾಟ್",

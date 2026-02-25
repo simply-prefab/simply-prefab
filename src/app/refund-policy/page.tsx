@@ -135,7 +135,7 @@ export default function RefundPolicyPage() {
             <div className="bg-orange-50 rounded-lg p-6 my-4" style={{ border: '1px solid #FFD0A0' }}>
               <h4 className="font-semibold mb-3" style={{ color: '#1a1a1a' }}>Contact us via:</h4>
               <ul className="space-y-2">
-                <li><strong>Email:</strong> <a href="mailto:enquiry@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>enquiry@simplyprefab.com</a></li>
+                <li><strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a></li>
               </ul>
               <p className="mt-4 text-sm" style={{ color: '#666' }}>
                 <strong>Include in your request:</strong><br />
@@ -258,7 +258,7 @@ export default function RefundPolicyPage() {
             <ol className="list-decimal pl-6 space-y-2">
               <li>Check with your bank/payment provider for processing delays</li>
               <li>Verify the refund transaction ID in your confirmation email</li>
-              <li>Contact us at <a href="mailto:enquiry@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>enquiry@simplyprefab.com</a> with:
+              <li>Contact us at <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a> with:
                 <ul className="list-disc pl-6 mt-2">
                   <li>Booking ID</li>
                   <li>Payment transaction ID</li>
@@ -317,7 +317,7 @@ export default function RefundPolicyPage() {
             <div className="bg-orange-50 rounded-lg p-6 mt-4" style={{ border: '1px solid #FFD0A0' }}>
               <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplePrefab Customer Support</p>
               <p style={{ color: '#666' }}>
-                <strong>Email:</strong> <a href="mailto:enquiry@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>enquiry@simplyprefab.com</a><br />
+                <strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a><br />
                 <strong>Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM IST<br />
                 <strong>Address:</strong> 2 Kallang Avenue, #05-08, Ct Hub, Singapore, 339407
               </p>

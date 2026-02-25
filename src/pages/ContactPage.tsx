@@ -16,9 +16,9 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: t('contactPage.emailSupport.title'),
-      details: ['enquiry@simplyprefab.com'],
+      details: ['Projects@simplyprefab.com'],
       action: t('contactPage.emailSupport.action'),
-      link: 'mailto:enquiry@simplyprefab.com'
+      link: 'mailto:Projects@simplyprefab.com'
     },
     {
       icon: MapPin,

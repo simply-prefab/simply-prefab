@@ -1229,7 +1229,7 @@ bottomCta: {
     title: "தொடர்பு தகவல்",
     address: "123 கிரீன் ஸ்ட்ரீட், ஈகோ சிட்டி, இந்தியா 500001",
     phone: "+91 98765 43210",
-    email: "enquiry@simplyprefab.com"
+    email: "Projects@simplyprefab.com"
   },
   social: {
     title: "எங்களை பின்தொடருங்கள்",
@@ -2464,7 +2464,7 @@ cta: {
     email: {
       title: "மின்னஞ்சல் ஆதரவு",
       description: "விரிவான பதில்கள் பெறவும்",
-      address: "enquiry@simplyprefab.com"
+      address: "Projects@simplyprefab.com"
     },
     chat: {
       title: "நேரடி உரையாடல்",

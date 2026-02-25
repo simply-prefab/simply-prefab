@@ -308,7 +308,7 @@ export default function TermsAndConditionsPage() {
             <h3 className="text-xl font-semibold mt-6 mb-3" style={{ color: '#FB921D' }}>
               13.1 Informal Resolution
             </h3>
-            <p>Before filing a legal claim, you agree to first contact us at <a href="mailto:enquiry@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>enquiry@simplyprefab.com</a> to attempt to resolve the dispute informally.</p>
+            <p>Before filing a legal claim, you agree to first contact us at <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a> to attempt to resolve the dispute informally.</p>
 
             <h3 className="text-xl font-semibold mt-6 mb-3" style={{ color: '#FB921D' }}>
               13.2 Arbitration
@@ -349,7 +349,7 @@ export default function TermsAndConditionsPage() {
             <div className="bg-orange-50 rounded-lg p-6 mt-4" style={{ border: '1px solid #FFD0A0' }}>
               <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplePrefab</p>
               <p style={{ color: '#666' }}>
-                <strong>Email:</strong> <a href="mailto:enquiry@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>enquiry@simplyprefab.com</a><br />
+                <strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a><br />
                 <strong>Phone:</strong> <a href="tel:+919000888844" className="underline" style={{ color: '#FB921D' }}>+91 90008 88844</a><br />
                 <strong>Address:</strong> 2 Kallang Avenue, #05-08, Ct Hub, Singapore, 339407
               </p>

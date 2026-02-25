@@ -186,7 +186,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>Data Portability:</strong> Request your data in a machine-readable format</li>
             </ul>
 
-            <p className="mt-4">To exercise these rights, contact us at: <a href="mailto:enquiry@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>enquiry@simplyprefab.com</a></p>
+            <p className="mt-4">To exercise these rights, contact us at: <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a></p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
               7. Cookies
@@ -251,7 +251,7 @@ export default function PrivacyPolicyPage() {
             <div className="bg-orange-50 rounded-lg p-6 mt-4" style={{ border: '1px solid #FFD0A0' }}>
               <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplePrefab</p>
               <p style={{ color: '#666' }}>
-                <strong>Email:</strong> <a href="mailto:enquiry@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>enquiry@simplyprefab.com</a><br />
+                <strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a><br />
                 <strong>Address:</strong> 2 Kallang Avenue, #05-08, Ct Hub, Singapore, 339407
               </p>
             </div>

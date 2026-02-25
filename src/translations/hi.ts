@@ -1203,7 +1203,7 @@ footer: {
     title: "संपर्क जानकारी",
     address: "123 ग्रीन स्ट्रीट, ईको सिटी, भारत 500001",
     phone: "+91 98765 43210",
-    email: "enquiry@simplyprefab.com"
+    email: "Projects@simplyprefab.com"
   },
   social: {
     title: "हमें फॉलो करें",
@@ -2448,7 +2448,7 @@ contact: {
   email: {
     title: "ईमेल सपोर्ट",
     description: "विस्तृत जानकारी प्राप्त करें",
-    address: "enquiry@simplyprefab.com"
+    address: "Projects@simplyprefab.com"
   },
   chat: {
     title: "लाइव चैट",

@@ -13,7 +13,7 @@ Create a `.env` file in your project root with the following variables:
 REACT_APP_SENDGRID_API_KEY=your_sendgrid_api_key_here
 REACT_APP_FROM_EMAIL=noreply@simplyprefab.com
 REACT_APP_TEAM_EMAIL=experts@simplyprefab.com
-REACT_APP_SUPPORT_EMAIL=enquiry@simplyprefab.com
+REACT_APP_SUPPORT_EMAIL=Projects@simplyprefab.com
 
 # Razorpay Payment Gateway (Primary for India)
 REACT_APP_RAZORPAY_KEY_ID=rzp_test_your_key_id_here

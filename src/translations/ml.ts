@@ -1223,7 +1223,7 @@ export const mlTranslations = {
       title: "ബന്ധപ്പെടാനുള്ള വിവരങ്ങൾ",
       address: "123 ഗ്രീൻ സ്ട്രീറ്റ്, എക്കോ സിറ്റി, ഇന്ത്യ 500001",
       phone: "+91 98765 43210",
-      email: "enquiry@simplyprefab.com"
+      email: "Projects@simplyprefab.com"
     },
     social: {
       title: "ഞങ്ങളെ പിന്തുടരുക",
@@ -2458,7 +2458,7 @@ export const mlTranslations = {
       email: {
         title: "ഇമെയിൽ സപ്പോർട്ട്",
         description: "വിശദമായ ഉത്തരങ്ങൾ ലഭിക്കുക",
-        address: "enquiry@simplyprefab.com"
+        address: "Projects@simplyprefab.com"
       },
       chat: {
         title: "ലൈവ് ചാറ്റ്",

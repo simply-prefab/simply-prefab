@@ -1205,7 +1205,7 @@ export const teTranslations = {
       title: "సంప్రదింపు సమాచారం",
       address: "123 గ్రీన్ స్ట్రీట్, ఎకో సిటీ, భారతదేశం 500001",
       phone: "+91 98765 43210",
-      email: "enquiry@simplyprefab.com"
+      email: "Projects@simplyprefab.com"
     },
     social: {
       title: "మమ్మల్ని అనుసరించండి",
@@ -2442,7 +2442,7 @@ export const teTranslations = {
       email: {
         title: "ఇమెయిల్ మద్దతు",
         description: "వివరణాత్మక సమాధానాలు పొందండి",
-        address: "enquiry@simplyprefab.com"
+        address: "Projects@simplyprefab.com"
       },
       chat: {
         title: "లైవ్ చాట్",

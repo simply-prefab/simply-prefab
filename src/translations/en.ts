@@ -1188,7 +1188,7 @@ export const enTranslations = {
     contact: {
       title: "Contact Info",
       address: "123 Green Street, Eco City, India 500001",
-      email: "enquiry@simplyprefab.com"
+      email: "Projects@simplyprefab.com"
     },
     social: {
       title: "Follow Us",
@@ -2390,7 +2390,7 @@ export const enTranslations = {
       email: {
         title: "Email Support",
         description: "Get detailed answers",
-        address: "enquiry@simplyprefab.com"
+        address: "Projects@simplyprefab.com"
       },
       chat: {
         title: "Live Chat",
