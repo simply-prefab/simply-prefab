@@ -8,7 +8,8 @@ import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
 
 const RollingGallery = () => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const router = useRouter();
   const { t } = useLanguage();
 
@@ -162,7 +163,8 @@ const RollingGallery = () => {
               model={model}
               index={index}
               totalCards={homeModels.length}
-              containerRef={containerRef}
+              containerRef={containerRef as React.RefObject<HTMLDivElement>}
+
               router={router}
             />
           ))}

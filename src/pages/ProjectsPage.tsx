@@ -1,18 +1,18 @@
 'use client'
 
+import { useLanguage } from '@/contexts/LanguageContext';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Calendar, Home, MapPin, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { MapPin, Calendar, Home, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage } from '@/contexts/LanguageContext';
 
-const getYouTubeId = (url) => {
+const getYouTubeId = (url: string) => {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([^&\n?#]+)/);
   return match ? match[1] : null;
 };
 
-function getVideoThumbnail(url) {
+function getVideoThumbnail(url: string) {
   const id = getYouTubeId(url);
   if (id) return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
   return '/images/project-thumb-placeholder.jpg';
@@ -27,12 +27,17 @@ const YoutubeSVG = () => (
     zIndex: 2,
     pointerEvents: 'none'
   }}>
-    <path d="M66.52 7.16c-.71-2.68-2.82-4.79-5.5-5.5C56.88 0.19 34 0 34 0S11.12 0.19 7.98 1.66c-2.68.71-4.79 2.82-5.5 5.5C1.19 11.12 1 24 1 24s.19 12.88 1.48 16.84c.71 2.68 2.82 4.79 5.5 5.5C11.12 47.81 34 48 34 48s22.88-.19 26.02-1.66c2.68-.71 4.79-2.82 5.5-5.5C66.81 35.88 67 24 67 24s-.19-12.88-1.48-16.84z" fill="#f00"/>
-    <path d="M45 24l-15 9V15z" fill="#fff"/>
+    <path d="M66.52 7.16c-.71-2.68-2.82-4.79-5.5-5.5C56.88 0.19 34 0 34 0S11.12 0.19 7.98 1.66c-2.68.71-4.79 2.82-5.5 5.5C1.19 11.12 1 24 1 24s.19 12.88 1.48 16.84c.71 2.68 2.82 4.79 5.5 5.5C11.12 47.81 34 48 34 48s22.88-.19 26.02-1.66c2.68-.71 4.79-2.82 5.5-5.5C66.81 35.88 67 24 67 24s-.19-12.88-1.48-16.84z" fill="#f00" />
+    <path d="M45 24l-15 9V15z" fill="#fff" />
   </svg>
 );
 
-const VideoModal = ({ videoUrl, title, onClose }) => {
+interface VideoModalProps {
+  videoUrl: string;
+  title: string;
+  onClose: () => void;
+}
+const VideoModal: React.FC<VideoModalProps> = ({ videoUrl, title, onClose }) => {
   const youtubeId = getYouTubeId(videoUrl);
 
   return (
@@ -78,7 +83,8 @@ const VideoModal = ({ videoUrl, title, onClose }) => {
 export default function ProjectsPage() {
   const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  type SelectedVideo = { url: string; title: string } | null;
+  const [selectedVideo, setSelectedVideo] = useState<SelectedVideo>(null);
 
   const getProjects = () => [
     {
@@ -801,7 +807,7 @@ export default function ProjectsPage() {
     ? projects
     : projects.filter(project => project.category === selectedCategory);
 
-  function handleThumbClick(project) {
+  function handleThumbClick(project:any) {
     const isYouTube = !!getYouTubeId(project.videoData?.src || "");
     if (isYouTube) {
       setSelectedVideo({ url: project.videoData.src, title: project.title });
@@ -821,7 +827,7 @@ export default function ProjectsPage() {
               {t('projectsPage.badge')}
             </Badge>
             <h1 className="text-4xl md:text-6xl mb-6 font-bold"
-                style={{ background: 'linear-gradient(135deg, #FDB515 0%, #8B4513 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', paddingBottom: '1rem' }}>
+              style={{ background: 'linear-gradient(135deg, #FDB515 0%, #8B4513 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', paddingBottom: '1rem' }}>
               {t('projectsPage.heading')}
             </h1>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: '#A0522D' }}>
@@ -894,7 +900,7 @@ export default function ProjectsPage() {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-1 mb-2 mt-2">
-                    {project.features?.slice(0,3).map((feature, idx) => (
+                    {project.features?.slice(0, 3).map((feature, idx) => (
                       <Badge key={idx} variant="outline" className="text-xs border-0"
                         style={{ backgroundColor: '#FDF8E8', color: '#8B4513' }}>
                         {feature}
@@ -929,7 +935,7 @@ export default function ProjectsPage() {
             {t('projectsPage.cta.description')}
           </p>
           <Button size="lg" className="font-semibold transition-all duration-300 border-2"
-                  style={{ backgroundColor: 'white', color: '#3C2414', borderColor: 'white' }}>
+            style={{ backgroundColor: 'white', color: '#3C2414', borderColor: 'white' }}>
             {t('projectsPage.cta.button')}
           </Button>
         </div>

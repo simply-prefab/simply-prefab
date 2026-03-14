@@ -11,7 +11,7 @@ import { useExpertConsultation } from '@/contexts/ExpertConsultationContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight, Building, Calculator, Clock, Hammer, Home, IndianRupee, MapPin, Paintbrush, Ruler, Shield, Wrench } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 import {
   Area,
   Bar,

@@ -936,7 +936,7 @@ export default function UPVCWindowsPage() {
                     style={{
                       backgroundColor: 'white',
                       border: '1px solid #FFD0A0',
-                      ringColor: color.popular ? '#FB921D' : 'transparent'
+                      // ringColor: color.popular ? '#FB921D' : 'transparent'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = '#FB921D';

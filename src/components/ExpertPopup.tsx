@@ -2,6 +2,7 @@
 
 import { useExpertConsultation } from '@/contexts/ExpertConsultationContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ConsultationBookingData } from '@/types/whatsapp';
 import EmailService from '@/utils/emailService';
 import { PAYMENT_CONFIG, PaymentGateway, formatCurrency } from '@/utils/paymentGateway';
 import { AlertCircle, ArrowLeft, ArrowRight, CalendarDays, CheckCircle2, Clock, CreditCard, Mail, MapPin, MessageCircle, Phone, Star } from 'lucide-react';
@@ -15,17 +16,6 @@ import { Progress } from './ui/progress';
 import { Textarea } from './ui/textarea';
 
 const CONSULTATION_SLOTS = [
-  { time: '00:00', label: '12:00 AM' },
-  { time: '01:00', label: '1:00 AM' },
-  { time: '02:00', label: '2:00 AM' },
-  { time: '03:00', label: '3:00 AM' },
-  { time: '04:00', label: '4:00 AM' },
-  { time: '05:00', label: '5:00 AM' },
-  { time: '06:00', label: '6:00 AM' },
-  { time: '07:00', label: '7:00 AM' },
-  { time: '08:00', label: '8:00 AM' },
-  { time: '09:00', label: '9:00 AM' },
-  { time: '10:00', label: '10:00 AM' },
   { time: '11:00', label: '11:00 AM' },
   { time: '12:00', label: '12:00 PM' },
   { time: '13:00', label: '1:00 PM' },
@@ -34,11 +24,7 @@ const CONSULTATION_SLOTS = [
   { time: '16:00', label: '4:00 PM' },
   { time: '17:00', label: '5:00 PM' },
   { time: '18:00', label: '6:00 PM' },
-  { time: '19:00', label: '7:00 PM' },
-  { time: '20:00', label: '8:00 PM' },
-  { time: '21:00', label: '9:00 PM' },
-  { time: '22:00', label: '10:00 PM' },
-  { time: '23:00', label: '11:00 PM' }
+  { time: '19:00', label: '7:00 PM' }
 ];
 
 interface SlotData {
@@ -120,13 +106,19 @@ const ExpertPopup = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const dayOfWeek = date.getDay();
-    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-    const isPast = date < today;
-    const isTooFarFuture = date > new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+    const candidate = new Date(date);
+    candidate.setHours(0, 0, 0, 0);
 
-    return !isWeekend && !isPast && !isTooFarFuture;
+    const dayOfWeek = candidate.getDay();
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    const isToday = candidate.getTime() === today.getTime();
+    const isPast = candidate < today;
+    const isTooFarFuture =
+      candidate > new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    return !isWeekend && !isToday && !isPast && !isTooFarFuture;
   };
+
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,32 +130,193 @@ const ExpertPopup = () => {
   };
 
   const handlePayment = async () => {
+    if (process.env.NEXT_PUBLIC_IS_TEST_MODE) {
+      handlePaymentTest();
+    }
+    else {
+
+      setIsProcessing(true);
+      setBookingError('');
+
+      try {
+        const paymentGateway = PaymentGateway.getInstance();
+        const consultationFee = PAYMENT_CONFIG.consultationFee['expert-consultation'];
+        const totalAmount = consultationFee;
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const paymentResult = await paymentGateway.processRazorpayPayment({
+          amount: totalAmount,
+          currency: PAYMENT_CONFIG.currency,
+          description: t('expertConsultation.payment.consultationTitle'),
+          customerEmail: formData.email,
+          customerName: formData.name,
+          customerPhone: formData.mobile,
+          consultationType: 'expert-consultation',
+          metadata: {
+            formData: formData,
+            scheduleData: {
+              appointmentDate: scheduleData.selectedDate?.toISOString() || new Date().toISOString(),
+              appointmentTime: scheduleData.selectedTimeSlot || '10:00'
+            }
+          }
+        });
+
+        if (paymentResult.success) {
+          const dateString = scheduleData.selectedDate?.toISOString().split('T')[0];
+
+          const bookingResponse = await fetch('/api/booking/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              date: dateString,
+              timeSlot: scheduleData.selectedTimeSlot,
+              customerName: formData.name,
+              customerEmail: formData.email,
+              customerPhone: formData.mobile,
+              projectType: formData.projectType,
+              location: formData.location,
+              message: formData.message,
+              paymentId: paymentResult.paymentId,
+              orderId: paymentResult.orderId,
+              amount: totalAmount
+            })
+          });
+
+          if (bookingResponse.status === 409) {
+            const errorData = await bookingResponse.json();
+            throw new Error('SLOT_ALREADY_BOOKED: ' + errorData.message);
+          }
+
+          if (!bookingResponse.ok) {
+            throw new Error(t('expertConsultation.errors.failedToCreate'));
+          }
+
+          const appointmentDate =
+            scheduleData.selectedDate
+              ? scheduleData.selectedDate.toLocaleDateString('en-IN', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })
+              : new Date().toLocaleDateString('en-IN', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+          const bookingData = await bookingResponse.json();
+          const booking: ConsultationBookingData = {
+            bookingId: bookingData.bookingId,
+            customerName: formData.name,
+            customerEmail: formData.email,
+            customerPhone: formData.mobile,
+            consultationType: 'expert-consultation',
+            appointmentDate: appointmentDate,
+            appointmentTime: scheduleData.selectedTimeSlot,
+            paymentId: paymentResult.paymentId,
+            orderId: paymentResult.orderId,
+            amount: totalAmount,
+            location: formData.location,
+            projectType: formData.projectType,
+            message: formData.message
+          };
+
+          // 🚀 SEND EMAILS WITH DELAYS (600ms between each)
+          const emailService = EmailService.getInstance();
+
+          try {
+            // Email 1: Customer confirmation
+            await emailService.sendCustomerConfirmation(booking);
+            console.log('✅ Customer confirmation sent');
+
+            // ⏰ Wait 600ms
+            await new Promise(resolve => setTimeout(resolve, 600));
+
+            // Email 2: Team notification
+            await emailService.sendTeamNotification(booking);
+            console.log('✅ Team notification sent');
+
+            // ⏰ Wait 600ms
+            await new Promise(resolve => setTimeout(resolve, 600));
+
+            // Email 3: Calendar invitation
+            await emailService.sendCalendarInvitation(booking);
+            console.log('✅ Calendar invitation sent');
+
+          } catch (emailError) {
+            console.error('⚠️ Email sending failed:', emailError);
+            // Don't fail the booking if emails fail
+          }
+
+          setBookingDetails(booking);
+          setCurrentStep('success');
+
+          await new Promise(resolve => setTimeout(resolve, 300));
+
+          window.dispatchEvent(new CustomEvent('expertConsultationSuccess', {
+            detail: { booking, currentStep: 'success', shouldReopen: true }
+          }));
+
+        } else {
+          throw new Error(paymentResult.error || t('expertConsultation.errors.paymentError'));
+        }
+      } catch (error) {
+        console.error('Payment/Booking failed:', error);
+
+        let errorMessage = t('expertConsultation.errors.bookingFailed');
+        let showRetry = true;
+
+        if (error instanceof Error) {
+          if (error.message.includes('SLOT_ALREADY_BOOKED')) {
+            errorMessage = t('expertConsultation.errors.slotAlreadyBooked');
+            showRetry = false;
+          } else if (error.message.includes('not configured')) {
+            errorMessage = t('expertConsultation.errors.paymentUnavailable');
+          } else if (error.message.includes('network')) {
+            errorMessage = t('expertConsultation.errors.networkError');
+          } else if (error.message.includes('Razorpay')) {
+            errorMessage = t('expertConsultation.errors.paymentError');
+          } else if (error.message.includes('user closed')) {
+            errorMessage = t('expertConsultation.errors.paymentCancelled');
+          }
+        }
+
+        setBookingError(errorMessage);
+        alert(errorMessage);
+
+        window.dispatchEvent(new CustomEvent('expertConsultationPaymentFailed', {
+          detail: {
+            error: errorMessage,
+            shouldReopen: true,
+            goToStep: showRetry ? 'payment' : 'schedule'
+          }
+        }));
+
+      } finally {
+        setIsProcessing(false);
+      }
+    }
+  };
+
+  const handlePaymentTest = async () => {
     setIsProcessing(true);
     setBookingError('');
 
     try {
-      const paymentGateway = PaymentGateway.getInstance();
+      // const paymentGateway = PaymentGateway.getInstance();
       const consultationFee = PAYMENT_CONFIG.consultationFee['expert-consultation'];
       const totalAmount = consultationFee;
 
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // await new Promise(resolve => setTimeout(resolve, 500));
 
-      const paymentResult = await paymentGateway.processRazorpayPayment({
-        amount: totalAmount,
-        currency: PAYMENT_CONFIG.currency,
-        description: t('expertConsultation.payment.consultationTitle'),
-        customerEmail: formData.email,
-        customerName: formData.name,
-        customerPhone: formData.mobile,
-        consultationType: 'expert-consultation',
-        metadata: {
-          formData: formData,
-          scheduleData: {
-            appointmentDate: scheduleData.selectedDate?.toISOString() || new Date().toISOString(),
-            appointmentTime: scheduleData.selectedTimeSlot || '10:00'
-          }
-        }
-      });
+      const paymentResult = {
+        success: true,
+        paymentId: 'test_payment_123',
+        orderId: 'test_order_456',
+        error: "test error"
+      }
 
       if (paymentResult.success) {
         const dateString = scheduleData.selectedDate?.toISOString().split('T')[0];
@@ -194,20 +347,28 @@ const ExpertPopup = () => {
         if (!bookingResponse.ok) {
           throw new Error(t('expertConsultation.errors.failedToCreate'));
         }
-
+        const appointmentDate =
+          scheduleData.selectedDate
+            ? scheduleData.selectedDate.toLocaleDateString('en-IN', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })
+            : new Date().toLocaleDateString('en-IN', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
         const bookingData = await bookingResponse.json();
-        const booking = {
+        const booking: ConsultationBookingData = {
           bookingId: bookingData.bookingId,
           customerName: formData.name,
           customerEmail: formData.email,
           customerPhone: formData.mobile,
           consultationType: 'expert-consultation',
-          appointmentDate: scheduleData.selectedDate?.toLocaleDateString('en-IN', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }),
+          appointmentDate: appointmentDate,
           appointmentTime: scheduleData.selectedTimeSlot,
           paymentId: paymentResult.paymentId,
           orderId: paymentResult.orderId,
@@ -292,7 +453,6 @@ const ExpertPopup = () => {
       setIsProcessing(false);
     }
   };
-
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -781,48 +941,49 @@ const ExpertPopup = () => {
               </div>
             )}
 
-            {!loadingSlots && (
-              <div className="grid grid-cols-3 gap-3">
-                {availableSlots.map((slot) => {
-                  const slotConfig = CONSULTATION_SLOTS.find(s => s.time === slot.time);
+            {!loadingSlots && (<div className="grid grid-cols-3 gap-3">
+              {availableSlots
+                // keep only slots that exist in CONSULTATION_SLOTS (11:00–19:00)
+                .filter(slot =>
+                  CONSULTATION_SLOTS.some(cs => cs.time === slot.time)
+                )
+                .map(slot => {
+                  const slotConfig = CONSULTATION_SLOTS.find(
+                    cs => cs.time === slot.time
+                  );
+
                   return (
                     <button
                       key={slot.time}
-                      onClick={() => setScheduleData(prev => ({ ...prev, selectedTimeSlot: slot.time }))}
+                      onClick={() =>
+                        setScheduleData(prev => ({
+                          ...prev,
+                          selectedTimeSlot: slot.time
+                        }))
+                      }
                       disabled={!slot.available}
                       className="p-3 text-sm rounded-lg border transition-all"
                       style={{
-                        backgroundColor: scheduleData.selectedTimeSlot === slot.time
-                          ? '#FDB515'
-                          : slot.available ? 'white' : '#F0F0F0',
-                        color: scheduleData.selectedTimeSlot === slot.time
-                          ? 'white'
-                          : slot.available ? '#3C2414' : '#999',
-                        borderColor: scheduleData.selectedTimeSlot === slot.time
-                          ? '#FDB515'
-                          : slot.available ? '#E5D5B7' : '#DDD',
-                        cursor: slot.available ? 'pointer' : 'not-allowed',
-                        opacity: slot.available ? 1 : 0.6
-                      }}
-                      onMouseEnter={(e) => {
-                        if (slot.available && scheduleData.selectedTimeSlot !== slot.time) {
-                          e.currentTarget.style.borderColor = '#FDB515';
-                          e.currentTarget.style.backgroundColor = '#FDF8E8';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (slot.available && scheduleData.selectedTimeSlot !== slot.time) {
-                          e.currentTarget.style.borderColor = '#E5D5B7';
-                          e.currentTarget.style.backgroundColor = 'white';
-                        }
+                        backgroundColor:
+                          scheduleData.selectedTimeSlot === slot.time
+                            ? '#FDB515'
+                            : slot.available
+                              ? 'white'
+                              : '#F0F0F0',
+                        color:
+                          scheduleData.selectedTimeSlot === slot.time
+                            ? 'white'
+                            : slot.available
+                              ? '#3C2414'
+                              : '#999999'
                       }}
                     >
-                      <div>{slotConfig?.label}</div>
-                      {slot.booked && <div className="text-xs opacity-70">🔒 {t('expertConsultation.schedule.booked')}</div>}
+                      {slotConfig?.label}
                     </button>
                   );
                 })}
-              </div>
+            </div>
+
             )}
 
             <p

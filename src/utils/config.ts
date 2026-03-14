@@ -62,10 +62,7 @@ RAZORPAY: {
 // Environment check - simplified and robust
 export const isProduction = (() => {
   try {
-    // Vite's built-in production check (most reliable for Vite apps)
-    if (typeof import.meta !== 'undefined' && import.meta.env) {
-      return import.meta.env.PROD === true || import.meta.env.MODE === 'production';
-    }
+
     
     // Check for NODE_ENV (fallback)
     if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'production') {

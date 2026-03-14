@@ -35,14 +35,14 @@ class WhatsAppService {
       console.error(`❌ Failed to send WhatsApp ${data.type}:`, error);
       
       // Fallback: Generate WhatsApp URL for manual sending
-      if (import.meta.env.DEV) {
-        const message = this.generateFallbackMessage(data.type, data.metadata);
-        const whatsappUrl = this.generateWhatsAppURL(data.phoneNumber, message);
-        console.log('📱 Development fallback URL:', whatsappUrl);
+      // if (import.meta.env.DEV) {
+      //   const message = this.generateFallbackMessage(data.type, data.metadata);
+      //   const whatsappUrl = this.generateWhatsAppURL(data.phoneNumber, message);
+      //   console.log('📱 Development fallback URL:', whatsappUrl);
         
-        // Optional: Open in new tab for testing
-        window.open(whatsappUrl, '_blank');
-      }
+      //   // Optional: Open in new tab for testing
+      //   window.open(whatsappUrl, '_blank');
+      // }
       
       return false;
     }
@@ -111,7 +111,6 @@ class WhatsAppService {
       bookingId: 'QUICK-' + Date.now(),
       paymentId: 'QUICK-PAYMENT',
       consultationType: 'Quick Message',
-      questionnaire: { message }
     };
 
     return this.sendWhatsAppMessage({

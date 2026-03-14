@@ -156,7 +156,7 @@ const ProductDetail: React.FC<Props> = ({ product }) => {
                             ? 'border-[#FB921D] bg-[#FFF5E6] shadow-md scale-105'
                             : 'border-[#FFD0A0] bg-white hover:border-[#FB921D]'
                         }`}
-                        aria-label={t('productDetail.viewImage', { number: idx + 1 })}
+                        aria-label={t('productDetail.viewImage', { number:String( idx + 1) })}
                         type="button"
                       >
                         <img 

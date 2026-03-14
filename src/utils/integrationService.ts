@@ -2,9 +2,10 @@
 // Orchestrates all payment, email, and WhatsApp services
 
 import { PaymentGateway, PaymentDetails, PaymentResult } from './paymentGateway';
-import EmailService, { ConsultationBookingData } from './emailService';
+import EmailService from './emailService';
 import WhatsAppService from './whatsappService';
 import { CONFIG, validateConfig, isDevelopment } from './config';
+import { ConsultationBookingData } from '@/types/whatsapp';
 
 export interface BookingRequest {
   customerName: string;
@@ -100,7 +101,6 @@ export class IntegrationService {
         consultationType: bookingRequest.consultationType,
         appointmentDate: bookingRequest.appointmentDate,
         appointmentTime: bookingRequest.appointmentTime,
-        questionnaire: bookingRequest.questionnaire,
         paymentId: paymentResult.transactionId!,
         amount: bookingRequest.amount
       };

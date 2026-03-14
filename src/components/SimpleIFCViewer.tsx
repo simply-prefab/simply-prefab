@@ -1,11 +1,11 @@
 'use client'
 
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Home, Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { Alert, AlertDescription } from './ui/alert';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -27,10 +27,10 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
 }) => {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene>();
-  const cameraRef = useRef<THREE.PerspectiveCamera>();
-  const rendererRef = useRef<THREE.WebGLRenderer>();
-  const controlsRef = useRef<OrbitControls>();
+  const sceneRef = useRef<THREE.Scene>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer>(null);
+  const controlsRef = useRef<OrbitControls>(null);
   const currentModelRef = useRef<THREE.Object3D | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -179,7 +179,11 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
               undefined,
               (error) => {
                 console.error('OBJ load with MTL failed', error);
-                setError(t('viewer.errors.failedToLoadOBJ', { message: error?.message || String(error) }));
+                const msg =
+                  error && typeof error === 'object' && 'message' in error
+                    ? (error as { message: string }).message
+                    : String(error);
+                setError(t('viewer.errors.failedToLoadOBJ', { message: msg }));
                 setIsLoading(false);
                 setModelLoaded(false);
                 reject(error);
@@ -203,7 +207,11 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
               undefined,
               (error) => {
                 console.error('Fallback OBJ-only load failed', error);
-                setError(t('viewer.errors.failedToLoadOBJ', { message: error?.message || String(error) }));
+                const msg =
+                  error && typeof error === 'object' && 'message' in error
+                    ? (error as { message: string }).message
+                    : String(error);
+                setError(t('viewer.errors.failedToLoadOBJ', { message: msg }));
                 setIsLoading(false);
                 setModelLoaded(false);
                 reject(error);
@@ -230,7 +238,11 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
             undefined,
             (objErr) => {
               console.error('OBJ-only load also failed', objErr);
-              setError(t('viewer.errors.failedToLoadOBJOrMTL', { message: objErr?.message || String(objErr) }));
+              const msg =
+                objErr && typeof objErr === 'object' && 'message' in objErr
+                  ? (objErr as { message: string }).message
+                  : String(objErr);
+              setError(t('viewer.errors.failedToLoadOBJOrMTL', { message: msg }));
               setIsLoading(false);
               setModelLoaded(false);
               reject(objErr);
@@ -406,10 +418,10 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
 
         {modelLoaded && !isLoading && (
           <div className="absolute bottom-4 left-4 flex gap-2 rounded-lg p-2 shadow-lg z-10" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(8px)' }}>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              onClick={resetView} 
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={resetView}
               title={t('viewer.controls.resetView')}
               className="border-2 transition-all"
               style={{ borderColor: '#FB921D', color: '#FB921D' }}
@@ -424,10 +436,10 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
             >
               <Home className="w-4 h-4" />
             </Button>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              onClick={zoomIn} 
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={zoomIn}
               title={t('viewer.controls.zoomIn')}
               className="border transition-all"
               style={{ borderColor: '#FFD0A0', color: '#C55A00' }}
@@ -442,10 +454,10 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
             >
               <ZoomIn className="w-4 h-4" />
             </Button>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              onClick={zoomOut} 
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={zoomOut}
               title={t('viewer.controls.zoomOut')}
               className="border transition-all"
               style={{ borderColor: '#FFD0A0', color: '#C55A00' }}
@@ -460,10 +472,10 @@ const SimpleIFCViewer: React.FC<SimpleIFCViewerProps> = ({
             >
               <ZoomOut className="w-4 h-4" />
             </Button>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              onClick={toggleFullscreen} 
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={toggleFullscreen}
               title={t('viewer.controls.fullscreen')}
               className="border transition-all"
               style={{ borderColor: '#FFD0A0', color: '#C55A00' }}

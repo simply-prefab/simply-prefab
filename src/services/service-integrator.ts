@@ -57,51 +57,51 @@ export class ServiceIntegrator {
   }
 
   // Process payment and send confirmation
-  async processPayment(customerId: string, paymentDetails: PaymentDetails) {
-    try {
-      const customer = await FirebaseService.getCustomerDetails(customerId);
-      if (!customer) throw new Error('Customer not found');
+  // async processPayment(customerId: string, paymentDetails: PaymentDetails) {
+  //   try {
+  //     const customer = await FirebaseService.getCustomerDetails(customerId);
+  //     if (!customer) throw new Error('Customer not found');
 
-      // Create payment order
-      const order = await PaymentService.createOrder({
-        ...paymentDetails,
-        customerId
-      });
+  //     // Create payment order
+  //     const order = await PaymentService.createOrder({
+  //       ...paymentDetails,
+  //       customerId
+  //     });
 
-      // Update customer with payment details
-      await FirebaseService.updateCustomerDetails(customerId, {
-        paymentDetails: {
-          ...paymentDetails,
-          orderId: order.id,
-          status: order.status
-        }
-      });
+  //     // Update customer with payment details
+  //     await FirebaseService.updateCustomerDetails(customerId, {
+  //       paymentDetails: {
+  //         ...paymentDetails,
+  //         orderId: order.id,
+  //         status: order.status
+  //       }
+  //     });
 
-      // Send email confirmation
-      await EmailService.sendEmail({
-        to: customer.email,
-        subject: 'Payment Confirmation - SimplePrefab',
-        html: `
-          <h1>Payment Confirmation</h1>
-          <p>Dear ${customer.name},</p>
-          <p>Your payment has been processed successfully.</p>
-          <p>Order ID: ${order.id}</p>
-          <p>Amount: ${paymentDetails.amount} ${paymentDetails.currency}</p>
-        `
-      });
+  //     // Send email confirmation
+  //     await EmailService.sendEmail({
+  //       to: customer.email,
+  //       subject: 'Payment Confirmation - SimplePrefab',
+  //       html: `
+  //         <h1>Payment Confirmation</h1>
+  //         <p>Dear ${customer.name},</p>
+  //         <p>Your payment has been processed successfully.</p>
+  //         <p>Order ID: ${order.id}</p>
+  //         <p>Amount: ${paymentDetails.amount} ${paymentDetails.currency}</p>
+  //       `
+  //     });
 
-      // Send WhatsApp confirmation
-      if (customer.phone) {
-        await whatsAppService.sendPaymentConfirmation(customer.phone, {
-          orderId: order.id,
-          amount: `${paymentDetails.amount} ${paymentDetails.currency}`
-        });
-      }
+  //     // Send WhatsApp confirmation
+  //     if (customer.phone) {
+  //       await whatsAppService.sendPaymentConfirmation(customer.phone, {
+  //         orderId: order.id,
+  //         amount: `${paymentDetails.amount} ${paymentDetails.currency}`
+  //       });
+  //     }
 
-      return order;
-    } catch (error) {
-      console.error('Error processing payment:', error);
-      throw error;
-    }
-  }
+  //     return order;
+  //   } catch (error) {
+  //     console.error('Error processing payment:', error);
+  //     throw error;
+  //   }
+  // }
 }
