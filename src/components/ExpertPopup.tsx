@@ -130,7 +130,7 @@ const ExpertPopup = () => {
   };
 
   const handlePayment = async () => {
-    if (process.env.NEXT_PUBLIC_IS_TEST_MODE) {
+    if (process.env.NEXT_PUBLIC_IS_TEST_MODE === 'true') {
       handlePaymentTest();
     }
     else {
