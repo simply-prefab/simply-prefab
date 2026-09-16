@@ -6,9 +6,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Search, HelpCircle, MessageCircle, Phone, Mail, ArrowRight } from 'lucide-react';
+import { Search, HelpCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ContactInfoCards from '@/components/ContactInfoCards';
 
 export default function FAQsPage() {
   const { t } = useLanguage();
@@ -483,157 +484,30 @@ export default function FAQsPage() {
         </div>
       </motion.section>
 
-      {/* Contact Support Section */}
-      <motion.section 
+      {/* Contact Us Section */}
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         className="py-16"
         style={{ backgroundColor: '#FFF5E6' }}
       >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 
-            className="text-3xl mb-4 font-bold"
-            style={{ color: '#1a1a1a' }}
-          >
-            {t('faqsPage.contact.title')}
-          </h2>
-          <p 
-            className="text-lg mb-8"
-            style={{ color: '#666' }}
-          >
-            {t('faqsPage.contact.description')}
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            {[
-              {
-                icon: Phone,
-                title: t('faqsPage.contact.phone.title'),
-                description: t('faqsPage.contact.phone.description'),
-                button: t('faqsPage.contact.phone.number')
-              },
-              {
-                icon: Mail,
-                title: t('faqsPage.contact.email.title'),
-                description: t('faqsPage.contact.email.description'),
-                button: t('faqsPage.contact.email.address')
-              },
-              {
-                icon: MessageCircle,
-                title: t('faqsPage.contact.chat.title'),
-                description: t('faqsPage.contact.chat.description'),
-                button: t('faqsPage.contact.chat.button')
-              }
-            ].map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <motion.div 
-                  key={index}
-                  whileHover={{ scale: 1.05 }} 
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Card 
-                    className="p-6 text-center hover:shadow-lg transition-all duration-300 rounded-lg"
-                    style={{
-                      backgroundColor: 'white',
-                      borderColor: '#FFD0A0',
-                      borderWidth: '1px',
-                      borderStyle: 'solid'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#FB921D';
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = '#FFD0A0';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                  >
-                    <IconComponent 
-                      className="w-12 h-12 mx-auto mb-4"
-                      style={{ color: '#FB921D' }}
-                    />
-                    <h3 
-                      className="text-lg mb-2 font-semibold"
-                      style={{ color: '#1a1a1a' }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p 
-                      className="mb-4"
-                      style={{ color: '#666' }}
-                    >
-                      {item.description}
-                    </p>
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-2 font-semibold rounded-lg"
-                      style={{
-                        borderColor: '#C55A00',
-                        color: '#C55A00'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#C55A00';
-                        e.currentTarget.style.color = 'white';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = '#C55A00';
-                      }}
-                    >
-                      {item.button}
-                    </Button>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-lg p-6"
-            style={{
-              background: 'linear-gradient(to right, rgba(255, 224, 192, 0.7), rgba(255, 245, 230, 0.7))'
-            }}
-          >
-            <h3 
-              className="text-xl mb-2 font-bold"
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2
+              className="text-3xl mb-4 font-bold"
               style={{ color: '#1a1a1a' }}
             >
-              {t('faqsPage.contact.consultation.title')}
-            </h3>
-            <p 
-              className="mb-4"
+              {t('contactPage.title')}
+            </h2>
+            <p
+              className="text-lg max-w-3xl mx-auto"
               style={{ color: '#666' }}
             >
-              {t('faqsPage.contact.consultation.description')}
+              {t('contactPage.subtitle')}
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center gap-2"
-              style={{
-                backgroundColor: '#FB921D',
-                color: 'white'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#E67E0F';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 16px rgba(251, 146, 29, 0.3)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#FB921D';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            >
-              {t('faqsPage.contact.consultation.button')}
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </motion.div>
+          </div>
+          <ContactInfoCards />
         </div>
       </motion.section>
 

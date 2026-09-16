@@ -2384,26 +2384,6 @@ export const enTranslations = {
       }
     },
 
-    contact: {
-      title: "Still Have Questions?",
-      description: "Our expert team is here to help you with any specific questions about your prefab construction project.",
-      email: {
-        title: "Email Support",
-        description: "Get detailed answers",
-        address: "Projects@simplyprefab.com"
-      },
-      chat: {
-        title: "Live Chat",
-        description: "Instant assistance",
-        button: "Start Chat"
-      },
-      consultation: {
-        title: "Schedule a Free Consultation",
-        description: "Book a one-on-one session with our prefab construction experts to discuss your project in detail.",
-        button: "Book Consultation"
-      }
-    },
-
     knowledgeBase: {
       title: "Explore Our Knowledge Base",
       description: "Dive deeper into prefab construction with our comprehensive guides and resources.",
