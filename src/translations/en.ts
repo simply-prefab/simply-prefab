@@ -94,7 +94,7 @@ export const enTranslations = {
         description: "Reduce construction costs significantly with our efficient prefab manufacturing process."
       },
       speed: {
-        title: "6x Faster",
+        title: "50% Faster",
         subtitle: "Quick Construction",
         description: "Complete your dream home in weeks, not months, with our streamlined prefab process."
       }
@@ -114,8 +114,8 @@ export const enTranslations = {
     heading: "We ensure peace of mind, trust, and transparent prefab construction services.",
     description: "With our innovative prefab solutions, you get quality, speed, and transparency that traditional construction simply can't match.",
     learnMore: "Learn More",
-    whyCustomersTitle: "Why 1000+ Customers Choose SimplyPrefab",
-    trustedByTitle: "Trusted by Thousands",
+    whyCustomersTitle: "Why Customers Choose SimplyPrefab",
+    trustedByTitle: "Trusted by Homeowners Across India",
     stats: {
       happyCustomers: "Happy Customers",
       customerSatisfaction: "Customer Satisfaction",
@@ -124,7 +124,7 @@ export const enTranslations = {
     },
     cta: {
       title: "Ready to Build Your Dream Home?",
-      description: "Join thousands of satisfied homeowners who chose transparent, quality-assured, and sustainable prefab construction.",
+      description: "Join homeowners across India who chose transparent, quality-assured, and sustainable prefab construction.",
       schedule: "Schedule Consultation",
     },
     items: {
@@ -156,7 +156,7 @@ export const enTranslations = {
         description: "Compared to traditional construction"
       },
       faster: {
-        title: "60% Faster",
+        title: "50% Faster",
         value: "6-9 months",
         description: "Complete construction timeline"
       },
@@ -1140,7 +1140,7 @@ export const enTranslations = {
     savingsLead: "You could save up to 30% cost",
     savingsRest: "by choosing SimplyPrefab over traditional construction!",
     features: [
-      "6x Faster Construction",
+      "50% Faster Construction",
       "100% Eco-Friendly Materials",
       "Affordable, Beautiful and Built to Last"
     ],
@@ -1480,7 +1480,7 @@ export const enTranslations = {
     benefits: {
       fasterConstruction: {
         title: 'Faster Construction',
-        description: 'Up to 60% faster than traditional construction methods',
+        description: 'Up to 50% faster than traditional construction methods',
       },
       costEffective: {
         title: 'Cost Effective',
@@ -2261,7 +2261,7 @@ export const enTranslations = {
     hero: {
       badge: "Frequently Asked Questions",
       title: "Got Questions?",
-      description: "Find answers to common questions about SimplePrefab construction, costs, timelines, materials, and everything you need to know about building your dream home sustainably.",
+      description: "Find answers to common questions about SimplyPrefab construction, costs, timelines, materials, and everything you need to know about building your dream home sustainably.",
       searchPlaceholder: "Search for questions..."
     },
 
@@ -2311,19 +2311,19 @@ export const enTranslations = {
         answer: "Prefab buildings are built off-site in a controlled environment, which reduces construction time, waste, and labor costs. Traditional construction, on the other hand, involves building entirely on-site, which can be affected by weather and delays. Pre-fabricated elements are built off-site and assembled quickly on-site, ensuring rapid completion of your project."
       },
       2: {
-        question: "What quality of materials does SimplePrefab use?",
-        answer: "SimplePrefab uses highest quality steel of approved make in all projects. We are ISO 9001 certified and perform stringent quality checks on all materials. The grade of Primary members is 345 N/mm² and Cold Form members is also 345 N/mm². All materials meet stringent international standards."
+        question: "What quality of materials does SimplyPrefab use?",
+        answer: "SimplyPrefab uses highest quality steel of approved make in all projects. We are ISO 9001 certified and perform stringent quality checks on all materials. The grade of Primary members is 345 N/mm² and Cold Form members is also 345 N/mm². All materials meet stringent international standards."
       },
       3: {
         question: "What is the structural lifespan of a prefab building?",
-        answer: "SimplePrefab buildings are designed for a structure life of 25 years. Proper maintenance as per SimplePrefab Maintenance Guidelines will ensure assured structural performance throughout the building's life. With proper care and maintenance, your prefab structure will remain durable and functional for decades."
+        answer: "SimplyPrefab buildings are designed for a structure life of 25 years. Proper maintenance as per SimplyPrefab Maintenance Guidelines will ensure assured structural performance throughout the building's life. With proper care and maintenance, your prefab structure will remain durable and functional for decades."
       },
       4: {
         question: "Are prefab buildings lighter and more durable than conventional buildings?",
-        answer: "Yes, SimplePrefab buildings are lighter than conventional buildings and tend to be more durable. The ability to optimize structural elements enables significant reduction of steel consumption while maintaining strength. This results in cost savings and improved performance compared to traditional construction methods."
+        answer: "Yes, SimplyPrefab buildings are lighter than conventional buildings and tend to be more durable. The ability to optimize structural elements enables significant reduction of steel consumption while maintaining strength. This results in cost savings and improved performance compared to traditional construction methods."
       },
       5: {
-        question: "Does SimplePrefab operate pan-India?",
+        question: "Does SimplyPrefab operate pan-India?",
         answer: "Yes, we offer Prefab construction solutions pan-India. Our team of experts can help you with your prefab construction project anywhere in the country. Get in touch with us at +91-8179 601 941 to learn more about our services in your region."
       },
       6: {
@@ -2351,7 +2351,7 @@ export const enTranslations = {
         answer: "The cost per sqft cannot be fixed as it depends on various factors including location, customization level, materials chosen, finishes, and specific client needs. We recommend our customers to take consultation from our team of experts, which will help you in decision making and provide accurate cost estimates based on your specific project."
       },
       12: {
-        question: "Are consultations from SimplePrefab chargeable?",
+        question: "Are consultations from SimplyPrefab chargeable?",
         answer: "Yes, consultations are chargeable. However, the consultation fee will be adjusted in the project cost at the time of site handover, making it a zero-cost service for serious clients who proceed with the project."
       },
       13: {
@@ -2364,7 +2364,7 @@ export const enTranslations = {
       },
       15: {
         question: "Can prefab construction be used for different types of projects?",
-        answer: "Yes, prefab panels can be used for residential and commercial, as well as industrial projects. SimplePrefab has a range of construction solutions across industries to cater to specific needs, whether for apartments, commercial offices, factories, or specialized facilities."
+        answer: "Yes, prefab panels can be used for residential and commercial, as well as industrial projects. SimplyPrefab has a range of construction solutions across industries to cater to specific needs, whether for apartments, commercial offices, factories, or specialized facilities."
       },
       16: {
         question: "Can prefab panels be used for flat roof construction?",
@@ -2380,7 +2380,7 @@ export const enTranslations = {
       },
       19: {
         question: "Can prefab construction be used for multi-story buildings?",
-        answer: "Yes, we can construct G+1 (Ground plus 1 floor) and higher structures with prefab buildings. SimplePrefab has experience with multi-story prefab construction and can design appropriate structural systems for your requirements. Consult with our team to discuss your specific multi-story project needs."
+        answer: "Yes, we can construct G+1 (Ground plus 1 floor) and higher structures with prefab buildings. SimplyPrefab has experience with multi-story prefab construction and can design appropriate structural systems for your requirements. Consult with our team to discuss your specific multi-story project needs."
       }
     },
 
@@ -2896,7 +2896,7 @@ export const enTranslations = {
       },
       fastDelivery: {
         title: "Fast Delivery",
-        description: "60% faster than traditional construction",
+        description: "50% faster than traditional construction",
         stats: "6-9 Months Total Time"
       },
       warranty: {
@@ -2933,7 +2933,7 @@ export const enTranslations = {
 
     finalCta: {
       title: "Ready to Experience the SimplyPrefab Difference?",
-      subtitle: "Join thousands of satisfied homeowners who chose transparency, quality, and peace of mind.",
+      subtitle: "Join homeowners across India who chose transparency, quality, and peace of mind.",
       consultation: "Get Consultation",
       calculateSavings: "Calculate Your Savings"
     }
@@ -3124,22 +3124,22 @@ export const enTranslations = {
       },
       templates: {
         welcome: {
-          subject: "Welcome to SimplePrefab",
-          heading: "Welcome to SimplePrefab!",
-          body: "Thank you for choosing SimplePrefab. We're excited to help you with your prefab home journey!"
+          subject: "Welcome to SimplyPrefab",
+          heading: "Welcome to SimplyPrefab!",
+          body: "Thank you for choosing SimplyPrefab. We're excited to help you with your prefab home journey!"
         },
         consultation: {
-          subject: "SimplePrefab Consultation Scheduled",
+          subject: "SimplyPrefab Consultation Scheduled",
           heading: "Consultation Confirmed",
           body: "Your consultation has been scheduled with our expert team"
         },
         paymentConfirmation: {
-          subject: "Payment Confirmation - SimplePrefab",
+          subject: "Payment Confirmation - SimplyPrefab",
           heading: "Payment Confirmed",
           body: "Your payment has been processed successfully"
         },
         projectUpdate: {
-          subject: "Project Update - SimplePrefab",
+          subject: "Project Update - SimplyPrefab",
           heading: "Project Update",
           body: "Your project has been updated"
         }
@@ -3153,8 +3153,8 @@ export const enTranslations = {
         verificationFailed: "Payment verification failed"
       },
       razorpay: {
-        description: "Payment for SimplePrefab services",
-        businessName: "SimplePrefab",
+        description: "Payment for SimplyPrefab services",
+        businessName: "SimplyPrefab",
         currency: "INR"
       },
       status: {
@@ -3176,7 +3176,7 @@ export const enTranslations = {
         invalidPhone: "Invalid phone number"
       },
       templates: {
-        welcome: "Welcome to SimplePrefab! Thank you for choosing us for your prefab home journey.",
+        welcome: "Welcome to SimplyPrefab! Thank you for choosing us for your prefab home journey.",
         consultation: "Your consultation has been scheduled. Our expert will contact you soon.",
         paymentConfirmation: "Payment received! Thank you for your order.",
         projectUpdate: "Your project has been updated. Check the details in the app."
@@ -3184,7 +3184,7 @@ export const enTranslations = {
     },
     customer: {
       registration: {
-        success: "Registration successful! Welcome to SimplePrefab.",
+        success: "Registration successful! Welcome to SimplyPrefab.",
         failed: "Registration failed. Please try again.",
         emailAlreadyExists: "Email already registered",
         validationError: "Please fill all required fields"
@@ -3836,7 +3836,7 @@ export const enTranslations = {
       fastInstallation: {
         title: "Fast Installation",
         description: "No curing or plastering needed - ready to use",
-        value: "60% faster construction"
+        value: "50% faster construction"
       },
       energyEfficient: {
         title: "Energy Efficient",
@@ -4113,7 +4113,7 @@ export const enTranslations = {
     },
 
     statsSection: {
-      title: "Trusted by Thousands"
+      title: "Trusted by Homeowners Across India"
     },
 
     stats: {
@@ -4321,12 +4321,12 @@ export const enTranslations = {
 
   faq: {
     title: "Frequently Asked Questions",
-    subtitle: "Get answers to common questions about SimplePrefab's eco-friendly prefab homes, construction process, materials, and services.",
+    subtitle: "Get answers to common questions about SimplyPrefab's eco-friendly prefab homes, construction process, materials, and services.",
 
     questions: {
       whatIsPrefab: {
         question: "What is prefab construction and how is it different from traditional construction?",
-        answer: "Prefab (prefabricated) construction involves manufacturing building components in a controlled factory environment before transporting them to the construction site for assembly. Unlike traditional construction where everything is built on-site, prefab construction offers better quality control, reduced construction time (up to 60% faster), less waste generation, and consistent quality standards."
+        answer: "Prefab (prefabricated) construction involves manufacturing building components in a controlled factory environment before transporting them to the construction site for assembly. Unlike traditional construction where everything is built on-site, prefab construction offers better quality control, reduced construction time (up to 50% faster), less waste generation, and consistent quality standards."
       },
       howMuchSave: {
         question: "How much can I save with prefab construction?",
@@ -4337,12 +4337,12 @@ export const enTranslations = {
         answer: "The total timeline for a prefab home is typically 4-8 months, which includes design (2-4 weeks), manufacturing (6-10 weeks), and on-site assembly (2-3 days). This is significantly faster than traditional construction which can take 12-18 months. The exact timeline depends on the complexity of the design, size of the home, and local permit processing times."
       },
       materialQuality: {
-        question: "What quality of materials does SimplePrefab use?",
-        answer: "SimplePrefab uses highest quality steel of approved make in all projects. We are ISO 9001 certified and perform stringent quality checks on all materials. The grade of Primary members is 345 N/mm² and Cold Form members is also 345 N/mm². All materials meet stringent international standards and Indian building codes."
+        question: "What quality of materials does SimplyPrefab use?",
+        answer: "SimplyPrefab uses highest quality steel of approved make in all projects. We are ISO 9001 certified and perform stringent quality checks on all materials. The grade of Primary members is 345 N/mm² and Cold Form members is also 345 N/mm². All materials meet stringent international standards and Indian building codes."
       },
       structuralLifespan: {
         question: "What is the structural lifespan of a prefab building?",
-        answer: "SimplePrefab buildings are designed for a structure life of 25 years. Proper maintenance as per SimplePrefab Maintenance Guidelines will ensure assured structural performance throughout the building's life. With proper care and maintenance, your prefab structure will remain durable and functional for decades."
+        answer: "SimplyPrefab buildings are designed for a structure life of 25 years. Proper maintenance as per SimplyPrefab Maintenance Guidelines will ensure assured structural performance throughout the building's life. With proper care and maintenance, your prefab structure will remain durable and functional for decades."
       },
       customization: {
         question: "Can I customize the design of my prefab home?",
@@ -4354,7 +4354,7 @@ export const enTranslations = {
       },
       basePrice: {
         question: "What's included in the base price?",
-        answer: "Our quotes include manufacturing, delivery, and basic installation. Additional costs may include site preparation, foundation work, utilities connection, landscaping, and any premium finishes or customizations you choose. We provide detailed cost breakdowns upfront so you know exactly what to expect. There are no hidden costs with SimplePrefab."
+        answer: "Our quotes include manufacturing, delivery, and basic installation. Additional costs may include site preparation, foundation work, utilities connection, landscaping, and any premium finishes or customizations you choose. We provide detailed cost breakdowns upfront so you know exactly what to expect. There are no hidden costs with SimplyPrefab."
       },
       financing: {
         question: "Do you offer financing options?",
@@ -4373,23 +4373,23 @@ export const enTranslations = {
         answer: "Yes, our prefab homes are engineered to meet local wind and seismic loads as per Indian building codes. They are designed to withstand cyclones, earthquakes, and heavy rains. The precision manufacturing and quality materials often make prefab homes more structurally sound than site-built homes. We can design homes for specific regional conditions like coastal areas or earthquake-prone zones."
       },
       panIndia: {
-        question: "Does SimplePrefab operate pan-India?",
+        question: "Does SimplyPrefab operate pan-India?",
         answer: "Yes, we offer Prefab construction solutions pan-India. Our team of experts can help you with your prefab construction project anywhere in the country. Get in touch with us at +91-8179 601 941 to learn more about our services in your region."
       },
       consultationCharge: {
-        question: "Are consultations from SimplePrefab chargeable?",
+        question: "Are consultations from SimplyPrefab chargeable?",
         answer: "Yes, consultations are chargeable. However, the consultation fee will be adjusted in the project cost at the time of site handover, making it a zero-cost service for serious clients who proceed with the project."
       }
     },
 
     stillHaveQuestions: {
       title: "Still have questions?",
-      description: "Our expert team is here to help you understand every aspect of SimplePrefab construction and answer any specific questions about your project.",
+      description: "Our expert team is here to help you understand every aspect of SimplyPrefab construction and answer any specific questions about your project.",
       button: "Schedule Consultation"
     },
 
     awards: {
-      title: "🏆 Award-Winning SimplePrefab Service",
+      title: "🏆 Award-Winning SimplyPrefab Service",
       satisfaction: {
         title: "90% Satisfaction Rate",
         subtitle: "Based on 1000+ customers"

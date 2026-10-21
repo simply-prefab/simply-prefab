@@ -59,8 +59,8 @@ export const PaymentService = {
         key: RAZORPAY_KEY_ID,
         amount: orderDetails.amount,
         currency: orderDetails.currency,
-        name: 'SimplePrefab',
-        description: 'Payment for SimplePrefab services',
+        name: 'SimplyPrefab',
+        description: 'Payment for SimplyPrefab services',
         order_id: orderDetails.id,
         handler: async (response: any) => {
           try {

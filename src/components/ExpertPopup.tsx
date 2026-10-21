@@ -1313,7 +1313,7 @@ const ExpertPopup = () => {
                 className="text-sm cursor-pointer"
                 style={{ color: '#3C2414' }}
               >
-                I have read and agree to SimplePrefab's{' '}
+                I have read and agree to SimplyPrefab's{' '}
                 <a
                   href="/terms-and-conditions"
                   target="_blank"

@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
@@ -218,6 +218,16 @@ const Navigation = () => {
               <div className="relative z-[9999]">
                 <LanguageSwitcher />
               </div>
+              <a
+                href="tel:+918179601941"
+                className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold whitespace-nowrap rounded-md hover:bg-orange-50"
+                style={{ color: '#1a1a1a' }}
+                aria-label="Call SimplyPrefab"
+              >
+                <Phone className="h-4 w-4" style={{ color: '#FB921D' }} />
+                <span className="hidden xl:inline">+91 81796 01941</span>
+                <span className="xl:hidden">Call</span>
+              </a>
               <Button
                 onClick={openPopup}
                 className="font-medium px-4 xl:px-6 py-2 shadow-sm hover:shadow-md transition-all duration-200 text-nowrap text-sm xl:text-base"
@@ -246,6 +256,13 @@ const Navigation = () => {
               <div className="relative z-[9999]">
                 <LanguageSwitcher />
               </div>
+              <a
+                href="tel:+918179601941"
+                className="p-2 rounded-md hover:bg-orange-50"
+                aria-label="Call SimplyPrefab"
+              >
+                <Phone className="h-5 w-5" style={{ color: '#FB921D' }} />
+              </a>
               <Button
                 variant="ghost"
                 size="sm"

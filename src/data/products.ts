@@ -188,9 +188,9 @@ export const products: Product[] = [
     {
         id: 'glass-partitions',
         name: 'Glass Partitions',
-        image: '/images/products/glass-partitions/image.png',
+        image: '/images/products/glass-partitions/image.jpg',
         images: [
-            '/images/products/glass-partitions/image.png'
+            '/images/products/glass-partitions/image.jpg'
         ],
         description:
             'Non-load-bearing glass walls that divide spaces while maintaining openness, visual connectivity, and modern aesthetics.',
@@ -207,9 +207,9 @@ export const products: Product[] = [
     {
         id: 'architecture-services',
         name: 'Architecture Services',
-        image: '/images/products/architecture-services/image.png',
+        image: '/images/products/architecture-services/image.jpg',
         images: [
-            '/images/products/architecture-services/image.png'
+            '/images/products/architecture-services/image.jpg'
         ],
         description:
             'Creative architectural planning focused on functional, aesthetic, and practical spaces tailored to client needs.',
@@ -226,9 +226,9 @@ export const products: Product[] = [
     {
         id: 'bim-services',
         name: 'BIM Services',
-        image: '/images/products/bim-services/image.png',
+        image: '/images/products/bim-services/image.jpg',
         images: [
-            '/images/products/bim-services/image.png'
+            '/images/products/bim-services/image.jpg'
         ],
         description:
             'Digital building modeling for coordinated design, visualization, and construction documentation.',

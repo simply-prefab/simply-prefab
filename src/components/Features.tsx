@@ -35,7 +35,7 @@ const Features = () => {
       color: "linear-gradient(135deg, #FB921D, #E67E0F)",
       bgColor: "#FFF5E6",
       iconBg: "#FB921D",
-      image: "/images/safe-money-transaction.png"
+      image: "/images/safe-money-transaction.jpg"
     },
     {
       icon: FileText,
@@ -347,7 +347,7 @@ const Features = () => {
               { number: "1000+", label: t('features.stats.happyCustomers'), icon: "👥" },
               { number: "90%", label: t('features.stats.customerSatisfaction'), icon: "⭐" },
               { number: "10+", label: t('features.stats.citiesCovered'), icon: "🏙️" },
-              { number: "15+", label: t('features.stats.yearsExperience'), icon: "🏆" }
+              { number: "10+", label: t('features.stats.yearsExperience'), icon: "🏆" }
             ].map((stat, index) => (
               <motion.div
                 key={index}

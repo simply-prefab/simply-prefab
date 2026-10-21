@@ -2,8 +2,10 @@ import { Metadata } from 'next'
 import WaterProofingPage from '@/pages/services/WaterProofingPage'
 
 export const metadata: Metadata = {
-  title: 'Waterproofing Solutions',
-  description: 'Professional waterproofing services',
+  title: 'Roof & Terrace Waterproofing Services',
+  description:
+    'Professional roof, terrace and wall waterproofing for prefab and conventional buildings by SimplyPrefab.',
+  alternates: { canonical: '/services/waterproofing' },
 }
 
 // Force dynamic rendering to access context providers

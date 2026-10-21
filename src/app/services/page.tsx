@@ -2,8 +2,10 @@ import { Metadata } from 'next'
 import ServicesPage from '@/pages/ServicesPage'
 
 export const metadata: Metadata = {
-  title: 'Our Services',
-  description: 'Comprehensive prefab construction services',
+  title: 'Prefab Construction Services',
+  description:
+    'Turnkey prefab homes, prefab penthouses, wall panels, UPVC windows, MEP, waterproofing and architecture design services by SimplyPrefab.',
+  alternates: { canonical: '/services' },
 }
 
 // Force dynamic rendering to access context providers

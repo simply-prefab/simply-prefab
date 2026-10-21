@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 
 // Initialize Firebase Admin SDK
 if (!getApps().length) {
@@ -17,6 +18,18 @@ const adminDb = getFirestore();
 
 export async function POST(req: NextRequest) {
   try {
+    // Only signed-in admins may change bookings
+    const authHeader = req.headers.get('authorization') || '';
+    const idToken = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
+    if (!idToken) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    try {
+      await getAuth().verifyIdToken(idToken);
+    } catch {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { bookingId, status } = await req.json();
 
     console.log('📝 Updating booking status:', { bookingId, status });

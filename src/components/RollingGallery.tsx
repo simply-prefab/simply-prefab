@@ -18,8 +18,8 @@ const RollingGallery = () => {
       id: 1,
       name: t('homeModels.ecoCompact1200.title'),
       area: "1,200 sq ft",
-      bedrooms: 2,
-      bathrooms: 2,
+      bedrooms: 3,
+      bathrooms: 3,
       price: t('homeModels.ecoCompact1200.price') || "$120,000",
       image: "/images/models/image2.jpg",
       features: [
@@ -35,7 +35,7 @@ const RollingGallery = () => {
       name: t('homeModels.greenVilla1600.title'),
       area: "1,600 sq ft",
       bedrooms: 3,
-      bathrooms: 2.5,
+      bathrooms: 2,
       price: t('homeModels.greenVilla1600.price') || "$155,000",
       image: "/images/models/duplex1.jpg",
       features: [

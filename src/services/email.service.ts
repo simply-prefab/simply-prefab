@@ -48,7 +48,7 @@ export const EmailService = {
 
     const icalData = `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//SimplePrefab//Calendar//EN
+PRODID:-//SimplyPrefab//Calendar//EN
 BEGIN:VEVENT
 UID:${Math.random().toString(36).substring(2)}
 DTSTAMP:${formatDate(new Date())}
