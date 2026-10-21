@@ -6,10 +6,10 @@ service cloud.firestore {
     // =======================
     // CONSULTATION BOOKINGS
     // =======================
-    // Anyone can read bookings (for frontend slot availability UI)
+    // Only signed-in admins can read bookings (slot availability uses the server API)
     // No one can write except backend/server-side Admin SDK
     match /bookings/{bookingId} {
-      allow read: if true;
+      allow read: if request.auth != null;
       allow write: if false;
     }
 

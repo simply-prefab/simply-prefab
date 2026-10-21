@@ -13,11 +13,11 @@ export class ServiceIntegrator {
       // Send welcome email
       await EmailService.sendEmail({
         to: customerData.email,
-        subject: 'Welcome to SimplePrefab',
+        subject: 'Welcome to SimplyPrefab',
         html: `
-          <h1>Welcome to SimplePrefab!</h1>
+          <h1>Welcome to SimplyPrefab!</h1>
           <p>Dear ${customerData.name},</p>
-          <p>Thank you for choosing SimplePrefab. We're excited to help you with your prefab home journey!</p>
+          <p>Thank you for choosing SimplyPrefab. We're excited to help you with your prefab home journey!</p>
         `
       });
 
@@ -44,8 +44,8 @@ export class ServiceIntegrator {
         attendees: [customer.email],
         startTime: new Date(consultationData.startTime),
         endTime: new Date(consultationData.endTime),
-        subject: 'SimplePrefab Consultation',
-        description: consultationData.notes || 'Consultation session with SimplePrefab expert',
+        subject: 'SimplyPrefab Consultation',
+        description: consultationData.notes || 'Consultation session with SimplyPrefab expert',
         location: consultationData.location
       });
 
@@ -80,7 +80,7 @@ export class ServiceIntegrator {
   //     // Send email confirmation
   //     await EmailService.sendEmail({
   //       to: customer.email,
-  //       subject: 'Payment Confirmation - SimplePrefab',
+  //       subject: 'Payment Confirmation - SimplyPrefab',
   //       html: `
   //         <h1>Payment Confirmation</h1>
   //         <p>Dear ${customer.name},</p>

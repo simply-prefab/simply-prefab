@@ -204,7 +204,7 @@ export default function AdminLogin() {
           {/* Footer */}
           <div className="mt-6 pt-6 border-t text-center" style={{ borderColor: '#FFD0A0' }}>
             <p className="text-sm" style={{ color: '#666' }}>
-              Protected admin area • SimplePrefab
+              Protected admin area • SimplyPrefab
             </p>
           </div>
         </CardContent>

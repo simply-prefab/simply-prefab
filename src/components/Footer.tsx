@@ -96,6 +96,19 @@ const Footer = () => {
                   {t('footer.contact.email')}
                 </a>
               </div>
+              <div className="flex items-center">
+                <FaPhone
+                  className="h-4 w-4 mr-3 flex-shrink-0"
+                  style={{ color: '#FB921D' }}
+                />
+                <a
+                  href="tel:+919000888844"
+                  className="hover:underline"
+                  style={{ color: 'rgba(255, 255, 255, 0.8)' }}
+                >
+                  +91 90008 88844
+                </a>
+              </div>
             </div>
 
             {/* Office Locations */}

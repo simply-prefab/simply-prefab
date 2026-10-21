@@ -44,7 +44,7 @@ const WhySimplyPrefabPage = () => {
       color: "linear-gradient(135deg, #FB921D, #E67E0F)",
       bgColor: "#FFF5E6",
       iconBg: "#FB921D",
-      image: "/images/safe-money-transaction.png"
+      image: "/images/safe-money-transaction.jpg"
     },
     {
       icon: FileText,

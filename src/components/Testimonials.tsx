@@ -16,7 +16,7 @@ const Testimonials = () => {
       name: "Sarah Johnson",
       location: "Portland, OR",
       rating: 5,
-      text: "Fast delivery, eco-materials, saved 20%. EcoPrefab exceeded all our expectations. The process was smooth from start to finish.",
+      text: "Fast delivery, eco-materials, saved 20%. SimplyPrefab exceeded all our expectations. The process was smooth from start to finish.",
       project: "Modern Family Home",
       image: "https://images.unsplash.com/photo-1494790108755-2616b152b7ad?w=150&h=150&fit=crop&crop=face"
     },

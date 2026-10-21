@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { db } from '@/config/firebase.config';
+import { auth, db } from '@/config/firebase.config';
 import IntegrationService from '@/utils/integrationService';
 import { collection, limit, onSnapshot, orderBy, query, Timestamp } from 'firebase/firestore';
 import {
@@ -236,9 +236,14 @@ export default function AdminDashboard() {
     setIsUpdatingStatus(true);
     try {
       // ✅ Call the API route instead of updating Firestore directly
+      const idToken = await auth.currentUser?.getIdToken();
+      if (!idToken) throw new Error('Please log in again');
       const response = await fetch('/api/admin/update-booking-status', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
         body: JSON.stringify({
           bookingId: selectedBooking.id,
           status: newStatus

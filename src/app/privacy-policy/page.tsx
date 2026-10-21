@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
           <div className="prose prose-lg max-w-none" style={{ color: '#333' }}>
             
             <p className="text-lg mb-6" style={{ color: '#666' }}>
-              At <strong>SimplePrefab</strong>, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+              At <strong>SimplyPrefab</strong>, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
             </p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
@@ -133,7 +133,7 @@ export default function PrivacyPolicyPage() {
               3. Payment Information
             </h2>
             
-            <p>All payment transactions are processed securely through <strong>Razorpay</strong>, our payment gateway partner. SimplePrefab does not store your complete credit/debit card information or CVV on our servers.</p>
+            <p>All payment transactions are processed securely through <strong>Razorpay</strong>, our payment gateway partner. SimplyPrefab does not store your complete credit/debit card information or CVV on our servers.</p>
             
             <div className="bg-orange-50 border-l-4 p-4 my-4" style={{ borderColor: '#FB921D' }}>
               <p className="font-semibold" style={{ color: '#C55A00' }}>Payment Security:</p>
@@ -249,7 +249,7 @@ export default function PrivacyPolicyPage() {
             <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
             
             <div className="bg-orange-50 rounded-lg p-6 mt-4" style={{ border: '1px solid #FFD0A0' }}>
-              <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplePrefab</p>
+              <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplyPrefab</p>
               <p style={{ color: '#666' }}>
                 <strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a><br />
                 <strong>Address:</strong> 2 Kallang Avenue, #05-08, Ct Hub, Singapore, 339407

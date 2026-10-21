@@ -87,8 +87,8 @@ export const PaymentService = {
         key: currentMode === 'test' ? paymentConfig.test.keyId : paymentConfig.live.keyId,
         amount: orderDetails.amount,
         currency: orderDetails.currency,
-        name: 'SimplePrefab',
-        description: 'Payment for SimplePrefab services',
+        name: 'SimplyPrefab',
+        description: 'Payment for SimplyPrefab services',
         order_id: orderDetails.id,
         handler: (response: any) => {
           resolve(response);

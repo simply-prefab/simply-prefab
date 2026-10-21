@@ -71,7 +71,7 @@ export default function RefundPolicyPage() {
           <div className="prose prose-lg max-w-none" style={{ color: '#333' }}>
             
             <p className="text-lg mb-6" style={{ color: '#666' }}>
-              At <strong>SimplePrefab</strong>, we strive to provide excellent service. This Cancellation & Refund Policy outlines the terms and conditions for cancellations and refunds of our expert consultation services.
+              At <strong>SimplyPrefab</strong>, we strive to provide excellent service. This Cancellation & Refund Policy outlines the terms and conditions for cancellations and refunds of our expert consultation services.
             </p>
 
             <div className="bg-orange-50 border-l-4 p-4 my-6" style={{ borderColor: '#FB921D' }}>
@@ -178,10 +178,10 @@ export default function RefundPolicyPage() {
             </p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
-              4. Cancellation by SimplePrefab
+              4. Cancellation by SimplyPrefab
             </h2>
             
-            <p>In rare cases, SimplePrefab may need to cancel or reschedule your appointment due to:</p>
+            <p>In rare cases, SimplyPrefab may need to cancel or reschedule your appointment due to:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Expert unavailability (illness, emergency)</li>
               <li>Technical issues or system failures</li>
@@ -191,7 +191,7 @@ export default function RefundPolicyPage() {
             <h3 className="text-xl font-semibold mt-6 mb-3" style={{ color: '#FB921D' }}>
               4.1 Our Commitment
             </h3>
-            <p>If SimplePrefab cancels your appointment, you will receive:</p>
+            <p>If SimplyPrefab cancels your appointment, you will receive:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>100% Full Refund</strong> processed within 2-3 business days, OR</li>
               <li><strong>Free Rescheduling</strong> to a mutually convenient time, OR</li>
@@ -300,7 +300,7 @@ export default function RefundPolicyPage() {
               12. Changes to This Policy
             </h2>
             
-            <p>SimplePrefab reserves the right to modify this Cancellation & Refund Policy at any time. Changes will be effective upon posting to this page. Bookings made before policy changes will be governed by the policy in effect at the time of booking.</p>
+            <p>SimplyPrefab reserves the right to modify this Cancellation & Refund Policy at any time. Changes will be effective upon posting to this page. Bookings made before policy changes will be governed by the policy in effect at the time of booking.</p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
               13. Governing Law
@@ -315,7 +315,7 @@ export default function RefundPolicyPage() {
             <p>For cancellations, refunds, or questions about this policy, please contact us:</p>
             
             <div className="bg-orange-50 rounded-lg p-6 mt-4" style={{ border: '1px solid #FFD0A0' }}>
-              <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplePrefab Customer Support</p>
+              <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplyPrefab Customer Support</p>
               <p style={{ color: '#666' }}>
                 <strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a><br />
                 <strong>Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM IST<br />

@@ -71,14 +71,14 @@ export default function TermsAndConditionsPage() {
           <div className="prose prose-lg max-w-none" style={{ color: '#333' }}>
 
             <p className="text-lg mb-6" style={{ color: '#666' }}>
-              Welcome to <strong>SimplePrefab</strong>. By accessing our website and using our services, you agree to be bound by these Terms & Conditions. Please read them carefully before proceeding.
+              Welcome to <strong>SimplyPrefab</strong>. By accessing our website and using our services, you agree to be bound by these Terms & Conditions. Please read them carefully before proceeding.
             </p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
               1. Acceptance of Terms
             </h2>
 
-            <p>By accessing or using SimplePrefab's website (simplyprefab.com) and services, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions and our Privacy Policy. If you do not agree, please discontinue use immediately.</p>
+            <p>By accessing or using SimplyPrefab's website (simplyprefab.com) and services, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions and our Privacy Policy. If you do not agree, please discontinue use immediately.</p>
 
             {/* NEW SECTION: Paid Consultancy Terms */}
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
@@ -103,7 +103,7 @@ export default function TermsAndConditionsPage() {
               <li>All recommendations are based on <strong>information shared by the client</strong></li>
               <li>Cost ranges and timelines are <strong>indicative</strong>, not final quotations</li>
               <li>Final pricing and scope may change after site visit, soil condition review, design finalization, and material selection</li>
-              <li>SimplePrefab is not liable for decisions taken solely based on preliminary consultancy inputs</li>
+              <li>SimplyPrefab is not liable for decisions taken solely based on preliminary consultancy inputs</li>
             </ul>
 
             <div className="bg-orange-50 border-l-4 p-4 my-4" style={{ borderColor: '#FB921D' }}>
@@ -187,7 +187,7 @@ export default function TermsAndConditionsPage() {
             <h3 className="text-xl font-semibold mt-6 mb-3" style={{ color: '#FB921D' }}>
               3.3 Payment Security
             </h3>
-            <p>Your payment information is processed through Razorpay's secure PCI-DSS compliant platform. SimplePrefab does not store your card details. For payment security details, refer to <a href="https://razorpay.com/terms/" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: '#FB921D' }}>Razorpay's Terms</a>.</p>
+            <p>Your payment information is processed through Razorpay's secure PCI-DSS compliant platform. SimplyPrefab does not store your card details. For payment security details, refer to <a href="https://razorpay.com/terms/" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: '#FB921D' }}>Razorpay's Terms</a>.</p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
               4. User Obligations
@@ -207,14 +207,14 @@ export default function TermsAndConditionsPage() {
               5. Intellectual Property
             </h2>
 
-            <p>All content on SimplePrefab's website, including but not limited to:</p>
+            <p>All content on SimplyPrefab's website, including but not limited to:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Text, graphics, logos, images, and videos</li>
               <li>3D models and architectural designs</li>
               <li>Software code and functionality</li>
               <li>Trademarks and brand names</li>
             </ul>
-            <p className="mt-4">...are the exclusive property of SimplePrefab and protected by Indian and international copyright laws. Unauthorized use is prohibited.</p>
+            <p className="mt-4">...are the exclusive property of SimplyPrefab and protected by Indian and international copyright laws. Unauthorized use is prohibited.</p>
 
             <h3 className="text-xl font-semibold mt-6 mb-3" style={{ color: '#FB921D' }}>
               5.1 Limited License
@@ -227,7 +227,7 @@ export default function TermsAndConditionsPage() {
 
             <p>To the maximum extent permitted by Indian law:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>SimplePrefab is not liable for any indirect, incidental, special, or consequential damages</li>
+              <li>SimplyPrefab is not liable for any indirect, incidental, special, or consequential damages</li>
               <li>Our total liability for any claim shall not exceed the amount you paid for the specific service</li>
               <li>We do not guarantee uninterrupted or error-free service</li>
               <li>Consultations are advisory in nature; implementation is at your own risk</li>
@@ -235,7 +235,7 @@ export default function TermsAndConditionsPage() {
 
             <div className="bg-orange-50 border-l-4 p-4 my-4" style={{ borderColor: '#FB921D' }}>
               <p className="font-semibold" style={{ color: '#C55A00' }}>Important:</p>
-              <p>SimplePrefab provides consultation and construction services based on industry best practices. However, actual construction outcomes may vary based on site conditions, local regulations, and third-party contractors.</p>
+              <p>SimplyPrefab provides consultation and construction services based on industry best practices. However, actual construction outcomes may vary based on site conditions, local regulations, and third-party contractors.</p>
             </div>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
@@ -253,7 +253,7 @@ export default function TermsAndConditionsPage() {
               8. Indemnification
             </h2>
 
-            <p>You agree to indemnify and hold harmless SimplePrefab, its officers, employees, and partners from any claims, damages, or expenses arising from:</p>
+            <p>You agree to indemnify and hold harmless SimplyPrefab, its officers, employees, and partners from any claims, damages, or expenses arising from:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Your violation of these Terms & Conditions</li>
               <li>Your violation of any third-party rights</li>
@@ -287,7 +287,7 @@ export default function TermsAndConditionsPage() {
               11. Force Majeure
             </h2>
 
-            <p>SimplePrefab shall not be liable for any delay or failure to perform due to circumstances beyond our reasonable control, including but not limited to:</p>
+            <p>SimplyPrefab shall not be liable for any delay or failure to perform due to circumstances beyond our reasonable control, including but not limited to:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Natural disasters, pandemics, or acts of God</li>
               <li>Government actions or regulations</li>
@@ -338,7 +338,7 @@ export default function TermsAndConditionsPage() {
               16. Entire Agreement
             </h2>
 
-            <p>These Terms & Conditions, together with our Privacy Policy and Refund Policy, constitute the entire agreement between you and SimplePrefab regarding your use of our services.</p>
+            <p>These Terms & Conditions, together with our Privacy Policy and Refund Policy, constitute the entire agreement between you and SimplyPrefab regarding your use of our services.</p>
 
             <h2 className="text-2xl font-bold mt-8 mb-4" style={{ color: '#1a1a1a' }}>
               17. Contact Information
@@ -347,7 +347,7 @@ export default function TermsAndConditionsPage() {
             <p>For questions about these Terms & Conditions, please contact us:</p>
 
             <div className="bg-orange-50 rounded-lg p-6 mt-4" style={{ border: '1px solid #FFD0A0' }}>
-              <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplePrefab</p>
+              <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplyPrefab</p>
               <p style={{ color: '#666' }}>
                 <strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a><br />
                 <strong>Phone:</strong> <a href="tel:+919000888844" className="underline" style={{ color: '#FB921D' }}>+91 90008 88844</a><br />
@@ -358,7 +358,7 @@ export default function TermsAndConditionsPage() {
             <hr className="my-8" style={{ borderColor: '#FFD0A0' }} />
 
             <p className="text-sm" style={{ color: '#999' }}>
-              By using SimplePrefab's services, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions.
+              By using SimplyPrefab's services, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions.
             </p>
           </div>
         </motion.div>
