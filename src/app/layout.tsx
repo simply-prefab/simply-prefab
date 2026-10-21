@@ -57,7 +57,7 @@ const organizationJsonLd = {
   logo: 'https://www.simplyprefab.com/favicon.ico',
   image: 'https://www.simplyprefab.com/images/hero/house.jpg',
   email: 'projects@simplyprefab.com',
-  telephone: '+91-90008-88844',
+  telephone: '+91-81796-01941',
   areaServed: 'IN',
   description:
     'Turnkey prefab and pre-engineered steel structure construction for homes, villas, penthouses and commercial buildings across India.',

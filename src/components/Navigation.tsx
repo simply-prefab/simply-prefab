@@ -219,13 +219,13 @@ const Navigation = () => {
                 <LanguageSwitcher />
               </div>
               <a
-                href="tel:+919000888844"
+                href="tel:+918179601941"
                 className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold whitespace-nowrap rounded-md hover:bg-orange-50"
                 style={{ color: '#1a1a1a' }}
                 aria-label="Call SimplyPrefab"
               >
                 <Phone className="h-4 w-4" style={{ color: '#FB921D' }} />
-                <span className="hidden xl:inline">+91 90008 88844</span>
+                <span className="hidden xl:inline">+91 81796 01941</span>
                 <span className="xl:hidden">Call</span>
               </a>
               <Button
@@ -257,7 +257,7 @@ const Navigation = () => {
                 <LanguageSwitcher />
               </div>
               <a
-                href="tel:+919000888844"
+                href="tel:+918179601941"
                 className="p-2 rounded-md hover:bg-orange-50"
                 aria-label="Call SimplyPrefab"
               >

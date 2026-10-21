@@ -350,7 +350,7 @@ export default function TermsAndConditionsPage() {
               <p className="font-semibold mb-2" style={{ color: '#1a1a1a' }}>SimplyPrefab</p>
               <p style={{ color: '#666' }}>
                 <strong>Email:</strong> <a href="mailto:Projects@simplyprefab.com" className="underline" style={{ color: '#FB921D' }}>Projects@simplyprefab.com</a><br />
-                <strong>Phone:</strong> <a href="tel:+919000888844" className="underline" style={{ color: '#FB921D' }}>+91 90008 88844</a><br />
+                <strong>Phone:</strong> <a href="tel:+918179601941" className="underline" style={{ color: '#FB921D' }}>+91 81796 01941</a><br />
                 <strong>Address:</strong> 2 Kallang Avenue, #05-08, Ct Hub, Singapore, 339407
               </p>
             </div>

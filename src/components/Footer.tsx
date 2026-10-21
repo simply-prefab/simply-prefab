@@ -102,11 +102,11 @@ const Footer = () => {
                   style={{ color: '#FB921D' }}
                 />
                 <a
-                  href="tel:+919000888844"
+                  href="tel:+918179601941"
                   className="hover:underline"
                   style={{ color: 'rgba(255, 255, 255, 0.8)' }}
                 >
-                  +91 90008 88844
+                  +91 81796 01941
                 </a>
               </div>
             </div>
