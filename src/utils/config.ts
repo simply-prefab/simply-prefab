@@ -12,7 +12,7 @@ const getEnvVar = (key: string, fallback: string = ''): string => {
 export const CONFIG = {
   // Resend Email Configuration (Primary)
   RESEND: {
-    API_KEY: getEnvVar('REACT_APP_RESEND_API_KEY', 're_DgNLjkPf_aNoU8k6JsESkL3zeVhb3tqZ3'),
+    API_KEY: getEnvVar('REACT_APP_RESEND_API_KEY', ''),
     FROM_EMAIL: getEnvVar('REACT_APP_FROM_EMAIL', 'tosayyad@gmail.com'),
     FROM_NAME: getEnvVar('REACT_APP_FROM_NAME', 'SimplyPrefab'),
     TEAM_EMAIL: getEnvVar('REACT_APP_TEAM_EMAIL', 'rafisayyad01@gmail.com'),
@@ -22,8 +22,8 @@ export const CONFIG = {
   // Razorpay Payment Gateway Configuration
 RAZORPAY: {
     // Server-side keys (for API routes) - no prefix
-    KEY_ID: getEnvVar('RAZORPAY_KEY_ID', 'rzp_live_RzPiBKucHDD7Nx'),
-    KEY_SECRET: getEnvVar('RAZORPAY_KEY_SECRET', 'oZN4d9MfwonOFcdV5rkGsIPs'),
+    KEY_ID: getEnvVar('RAZORPAY_KEY_ID', ''),
+    KEY_SECRET: getEnvVar('RAZORPAY_KEY_SECRET', ''),
     
     // Client-side key (for frontend) - with NEXT_PUBLIC_ prefix
     // PUBLIC_KEY_ID: getEnvVar('NEXT_PUBLIC_RAZORPAY_KEY_ID', ''),
@@ -108,7 +108,7 @@ export const validateConfig = () => {
     console.log('Environment:', { isDevelopment, isProduction });
     
     // Check Resend configuration
-    if (!CONFIG.RESEND.API_KEY || CONFIG.RESEND.API_KEY === 're_DgNLjkPf_aNoU8k6JsESkL3zeVhb3tqZ3') {
+    if (!CONFIG.RESEND.API_KEY || !CONFIG.RESEND.API_KEY) {
       console.info('📧 Development Mode: Emails will be mocked (Resend not configured)');
     } else {
       console.log('✅ Resend configured');
@@ -134,7 +134,7 @@ export const validateConfig = () => {
   }
 
   // In production mode, we require all services to be configured
-  if (!CONFIG.RESEND.API_KEY || CONFIG.RESEND.API_KEY === 're_DgNLjkPf_aNoU8k6JsESkL3zeVhb3tqZ3') {
+  if (!CONFIG.RESEND.API_KEY || !CONFIG.RESEND.API_KEY) {
     errors.push('Resend API key is not configured');
   }
 

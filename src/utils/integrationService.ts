@@ -318,7 +318,7 @@ export class IntegrationService {
     const recommendations: string[] = [];
 
     // Check Resend
-    if (CONFIG.RESEND.API_KEY && CONFIG.RESEND.API_KEY !== 're_DgNLjkPf_aNoU8k6JsESkL3zeVhb3tqZ3') {
+    if (CONFIG.RESEND.API_KEY) {
       configured.push('Resend Email Service');
     } else {
       missing.push('Resend Email Service');
