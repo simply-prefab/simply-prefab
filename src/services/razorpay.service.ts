@@ -15,7 +15,7 @@ const paymentConfig: PaymentConfig = {
     keySecret: 'your_test_secret_key'
   },
   live: {
-    keyId: 'rzp_live_your_key_id',
+    keyId: process.env.RAZORPAY_KEY_ID || '',
     keySecret: 'your_live_secret_key'
   }
 };

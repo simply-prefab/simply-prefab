@@ -309,7 +309,7 @@ class OperationsMonitor {
       // 1. Test Resend API connectivity
       // 2. Verify API key validity
       // 3. Check sending quotas
-      return CONFIG.RESEND.API_KEY !== 're_DgNLjkPf_aNoU8k6JsESkL3zeVhb3tqZ3';
+      return Boolean(CONFIG.RESEND.API_KEY);
     } catch (error) {
       console.error('Resend health check failed:', error);
       return false;
