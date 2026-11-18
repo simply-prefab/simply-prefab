@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { motion, AnimatePresence } from 'motion/react';
-import { CONFIG } from '@/utils/config';
 
 const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const whatsappNumber = CONFIG.WHATSAPP.TEAM_NUMBER || "918179601941";
+  const whatsappNumber = "916366823426"; // AiSensy chatbot number
   
   const handleWhatsAppChat = () => {
     const message = "Hello! I'm interested in SimplyPrefab's paid services. Can you help me?";
